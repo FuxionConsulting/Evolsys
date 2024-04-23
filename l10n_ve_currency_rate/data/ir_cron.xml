@@ -1,0 +1,12 @@
+<odoo>
+    <record id="ir_cron_currency_rate_update_ve" model="ir.cron">
+        <field name="name">Currency Rate Update VE</field>
+        <field name="model_id" ref="base.model_res_company" />
+        <field name="state">code</field>
+        <field name="code">model.run_update_currency()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False" />
+    </record>
+</odoo>

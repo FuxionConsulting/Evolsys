@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form_inherit_currency_rate" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.currency.rate</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form" />
+        <field name="priority" eval="100" />
+        <field name="arch" type="xml">
+	    <xpath expr="//field[@name='module_currency_rate_live']" position="attributes">
+	        <attribute name="invisible">True</attribute>
+	    </xpath>
+	    <xpath expr="//setting[@id='main_currency']" position="after">
+                <setting id="automatic_rate_ve" string="Automatic Rate for VE" help="Automatic Rate for VE"
+                     documentation="/applications/finance/accounting/others/multi_currency.html">
+                <field name="module_l10n_ve_currency_rate" />
+                <div invisible="not module_l10n_ve_currency_rate">
+                    <div class="row">
+                        <label string="Interval" for="currency_interval_period"
+                            class="col-lg-3 o_light_label" />
+                        <field name="currency_interval_period" />
+                    </div>
+                    <div class="mt8 row">
+                        <label string="Next Run" for="curr_next_execution_date"
+                            class="col-lg-3 o_light_label" />
+                        <field name="curr_next_execution_date" />
+                        <button name="update_currency_rate" type="object" class="btn-link w-auto">
+                            <i title="Update currency rate" role="img"
+                                aria-label="Update currency rate" class="fa fa-fw fa-refresh"></i>
+                        </button>
+                    </div>
+                </div>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
