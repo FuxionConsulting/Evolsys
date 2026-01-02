@@ -32,7 +32,6 @@
         'data/account.tax.group.xml',
         'data/account.tax.xml',
         'data/account.fiscal.position.xml',
-        #'data/account.chart.template.xml',
         'views/res_partner_company_view.xml',
         'views/res_partner_person_view.xml',
     ],
