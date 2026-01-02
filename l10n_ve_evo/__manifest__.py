@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 - l10n_evo
+# Copyright 2024 - l10n_ve_evo
 {
     'name': 'Venezuela - Contabilidad (Evolsys)',
     'author': 'Evolsys',
