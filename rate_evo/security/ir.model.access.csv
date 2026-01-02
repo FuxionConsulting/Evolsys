@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_audit_exchange_rate_user,rate_evo.audit.exchange.rate user,model_rate_evo_audit_exchange_rate,rate_evo.group_rate_evo_user,1,0,0,0
+access_audit_exchange_rate_manager,rate_evo.audit.exchange.rate manager,model_rate_evo_audit_exchange_rate,rate_evo.group_rate_evo_manager,1,1,1,1
+
+access_rate_log_user,rate_evo.rate.log user,model_rate_evo_rate_log,rate_evo.group_rate_evo_user,1,0,0,0
+access_rate_log_manager,rate_evo.rate.log manager,model_rate_evo_rate_log,rate_evo.group_rate_evo_manager,1,1,1,1
