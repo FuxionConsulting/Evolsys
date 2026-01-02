@@ -1,0 +1,312 @@
+id,name,municipality_id/id,state_id/id,zip,code
+city_la_esmeralda_am,La Esmeralda,mun_alto_orinoco_am,state_ve_am,7101,AOR
+city_san_fernando_atabapo_am,San Fernando de Atabapo,mun_atabapo_am,state_ve_am,7102,ATA
+city_puerto_ayacucho_am,Puerto Ayacucho,mun_atures_am,state_ve_am,7101,ATU
+city_isla_raton_am,Isla Ratón,mun_autana_am,state_ve_am,7103,AUT
+city_maroa_am,Maroa,mun_maroa_am,state_ve_am,7104,MAR
+city_san_juan_manapiare_am,San Juan de Manapiare,mun_manapiare_am,state_ve_am,7105,MAN
+city_san_carlos_rio_negro_am,San Carlos de Río Negro,mun_rio_negro_am,state_ve_am,7106,RNE
+city_barcelona_an,Barcelona,mun_simon_bolivar_an,state_ve_an,6001,BAR
+city_puerto_la_cruz_an,Puerto La Cruz,mun_juan_antonio_sotillo_an,state_ve_an,6023,PLC
+city_lecheria_an,Lechería,mun_sotillo_an,state_ve_an,6016,LEC
+city_guanta_an,Guanta,mun_guanta_an,state_ve_an,6015,GUA
+city_anaco_an,Anaco,mun_anaco_an,state_ve_an,6003,ANA
+city_cantaura_an,Cantaura,mun_freites_an,state_ve_an,6002,CAN
+city_pariaguan_an,Pariaguán,mun_miranda_an,state_ve_an,6050,PAR
+city_clarines_an,Clarines,mun_peñalver_an,state_ve_an,6012,CLA
+city_piritu_an,Píritu,mun_piritu_an,state_ve_an,6011,PIR
+city_boca_uchire_an,Boca de Uchire,mun_san_juan_capistrano_an,state_ve_an,6027,BUC
+city_el_tigre_an,El Tigre,mun_simon_rodriguez_an,state_ve_an,6050,TIG
+city_santa_ana_an,Santa Ana,mun_san_jose_g_ana,state_ve_an,6020,SAN
+city_achaguas_ap,Achaguas,mun_biruel_ap,state_ve_ap,7002,ACH
+city_biruaca_ap,Biruaca,mun_biruaca_ap,state_ve_ap,7003,BIR
+city_mantecal_ap,Mantecal,mun_munoz_ap,state_ve_ap,7004,MAN
+city_guasdualito_ap,Guasdualito,mun_paez_ap,state_ve_ap,7001,GUA
+city_san_jose_camejo_ap,San Juan de Payara,mun_pedro_camejo_ap,state_ve_ap,7005,SJP
+city_elorza_ap,Elorza,mun_romulo_gallegos_ap,state_ve_ap,7006,ELO
+city_san_fernando_ap,San Fernando de Apure,mun_san_fernando_ap,state_ve_ap,7001,SFE
+city_maracay_ar,Maracay,mun_girardot_ar,state_ve_ar,2101,MAR
+city_turmero_ar,Turmero,mun_mariño_ar,state_ve_ar,2115,TUR
+city_sanmateo_ar,San Mateo,mun_bolivar_ar,state_ve_ar,2120,SMT
+city_camatagua_ar,Camatagua,mun_camatiagua_ar,state_ve_ar,2335,CAM
+city_san_casimiro_ar,San Casimiro,mun_san_casimiro_ar,state_ve_ar,2333,SCA
+city_san_sebastian_ar,San Sebastián,mun_san_sebastian_ar,state_ve_ar,2332,SSE
+city_santa_cruz_ar,Santa Cruz,mun_lamas_ar,state_ve_ar,2123,SCR
+city_palo_negro_ar,Palo Negro,mun_libertador_ar,state_ve_ar,2118,PNG
+city_el_limon_ar,El Limón,mun_mario_briceño_ar,state_ve_ar,2107,ELM
+city_las_tejerias_ar,Las Tejerías,mun_santos_michelena_ar,state_ve_ar,2121,LTJ
+city_cagua_ar,Cagua,mun_sucre_ar,state_ve_ar,2122,CAG
+city_tovar_ar,Tovar,mun_tovar_ar,state_ve_ar,2334,TOV
+city_ocumare_ar,Ocumare de la Costa,mun_ocumare_ar,state_ve_ar,2109,OCU
+city_san_francisco_ar,San Francisco,mun_miranda_ar,state_ve_ar,2124,SFR
+city_el_consejo_ar,El Consejo,mun_jose_rangel_ar,state_ve_ar,2125,CON
+city_la_victoria_ar,La Victoria,mun_jose_felix_ribas_ar,state_ve_ar,2126,LVIC
+city_santa_rita_ar,Santa Rita,mun_fla_ar,state_ve_ar,2105,SRT
+city_paraparal_ar,Paraparal,mun_fla_ar,state_ve_ar,2106,PAR
+city_barinas_ba,Barinas,mun_barinas_ba,state_ve_ba,5201,BAR
+city_sabaneta_ba,Sabaneta,mun_alberto_arvelo_ba,state_ve_ba,5216,SAB
+city_barinitas_ba,Barinitas,mun_bolivar_ba,state_ve_ba,5203,BTS
+city_ciudad_bolivia_ba,Ciudad Bolivia,mun_pedraza_ba,state_ve_ba,5209,CBO
+city_santa_barbara_ba,Santa Bárbara,mun_ezequiel_zamora_ba,state_ve_ba,5210,SBA
+city_obispos_ba,Obispos,mun_obispos_ba,state_ve_ba,5207,OBI
+city_libertad_ba,Libertad,mun_rivas_davila_ba,state_ve_ba,5208,LIB
+city_ciudad_nutrias_ba,Ciudad de Nutrias,mun_sosa_ba,state_ve_ba,5215,NUT
+city_arismendi_ba,Arismendi,mun_arismendi_ba,state_ve_ba,5212,ARI
+city_soledad_ba,Soledad,mun_cruz_paredes_ba,state_ve_ba,5214,SOL
+city_santa_cruz_ba,Santa Cruz de Guacas,mun_andres_e_blanco_ba,state_ve_ba,5211,SCG
+city_ciudad_bolivar_bo,Ciudad Bolívar,mun_her_soto_bo,state_ve_bo,8001,CBL
+city_ciudad_guayana_bo,Ciudad Guayana,mun_caroni_bo,state_ve_bo,8050,CGU
+city_caicara_orinoco_bo,Caicara del Orinoco,mun_cedeno_bo,state_ve_bo,8011,CAI
+city_el_callao_bo,El Callao,mun_el_callao_bo,state_ve_bo,8052,ECA
+city_santa_elena_uairen_bo,Santa Elena de Uairén,mun_gran_sabana_bo,state_ve_bo,8015,SEU
+city_el_palmar_bo,El Palmar,mun_padre_pedro_chien_bo,state_ve_bo,8013,EPM
+city_upata_bo,Upata,mun_pi_ar_bo,state_ve_bo,8054,UPA
+city_maripa_bo,Maripa,mun_raul_leoni_bo,state_ve_bo,8017,MRP
+city_guasipati_bo,Guasipati,mun_roscio_bo,state_ve_bo,8056,GUA
+city_tumeremo_bo,Tumeremo,mun_sifontes_bo,state_ve_bo,8058,TUM
+city_aripao_bo,Aripao,mun_sucre_bo,state_ve_bo,8019,ARP
+city_valencia_ca,Valencia,mun_valencia_ca,state_ve_ca,2001,VAL
+city_naguanagua_ca,Naguanagua,mun_naguanagua_ca,state_ve_ca,2005,NAG
+city_sandiego_ca,San Diego,mun_san_diego_ca,state_ve_ca,2006,SAN
+city_guacara_ca,Guacara,mun_guacara_ca,state_ve_ca,2015,GUA
+city_losguayos_ca,Los Guayos,mun_los_guayos_ca,state_ve_ca,2011,LGU
+city_puertocabello_ca,Puerto Cabello,mun_puerto_cabello_ca,state_ve_ca,2050,PTC
+city_moron_ca,Morón,mun_juan_jose_mora_ca,state_ve_ca,2055,MOR
+city_bejuma_ca,Bejuma,mun_bejuma_ca,state_ve_ca,2040,BEJ
+city_montalban_ca,Montalbán,mun_montalban_ca,state_ve_ca,2042,MON
+city_miranda_ca,Miranda,mun_miranda_ca,state_ve_ca,2041,MIR
+city_güigüe_ca,Güigüe,mun_carlos_arvelo_ca,state_ve_ca,2010,GUI
+city_mariara_ca,Mariara,mun_diego_ibarra_ca,state_ve_ca,2017,MAR
+city_sanjoaquin_ca,San Joaquín,mun_san_joaquin_ca,state_ve_ca,2018,SJQ
+city_tocuyito_ca,Tocuyito,mun_libertador_ca,state_ve_ca,2035,TOC
+city_san_carlos_co,San Carlos,mun_san_carlos_co,state_ve_co,2201,SCA
+city_tinaquillo_co,Tinaquillo,mun_tinaquillo_co,state_ve_co,2209,TIN
+city_tinaco_co,Tinaco,mun_tinaco_co,state_ve_co,2208,TNC
+city_macapo_co,Macapo,mun_lima_blanco_co,state_ve_co,2211,MAC
+city_el_baul_co,El Baúl,mun_girardot_co,state_ve_co,2212,EBA
+city_pao_co,Pao de San Juan Bautista,mun_pao_san_juan_bautista_co,state_ve_co,2213,PAO
+city_cojedes_co,Cojedes,mun_anzoategui_co,state_ve_co,2214,COJ
+city_las_vegas_co,Las Vegas,mun_romulo_gallegos_co,state_ve_co,2215,LVG
+city_ortiz_co,Ortiz,mun_ezequiel_zamora_co,state_ve_co,2216,ORT
+city_tucupita_da,Tucupita,mun_tucupita_da,state_ve_da,6401,TUC
+city_casacoima_da,Casacoima,mun_casacoima_da,state_ve_da,6402,CAS
+city_pedernales_da,Pedernales,mun_pedernales_da,state_ve_da,6403,PED
+city_curiapo_da,Curiapo,mun_antonio_diaz_da,state_ve_da,6404,CUR
+city_caracas_dc,Caracas,mun_libertador_dc,state_ve_dc,1010,CCS
+city_coro_fa,Coro,mun_miranda_fa,state_ve_fa,4101,COR
+city_punto_fijo_fa,Punto Fijo,mun_carirubana_fa,state_ve_fa,4102,PFI
+city_santa_ana_fa,Santa Ana,mun_bolivar_fa,state_ve_fa,4103,SAN
+city_pedregal_fa,Pedregal,mun_democracia_fa,state_ve_fa,4104,PED
+city_churuguara_fa,Churuguara,mun_federacion_fa,state_ve_fa,4105,CHU
+city_jacura_fa,Jacura,mun_jacura_fa,state_ve_fa,4106,JAC
+city_san_luis_fa,San Luis,mun_bolivar_fa,state_ve_fa,4107,SLU
+city_tucacas_fa,Tucacas,mun_silva_fa,state_ve_fa,4109,TUC
+city_dabajuro_fa,Dabajuro,mun_dabajuro_fa,state_ve_fa,4110,DAB
+city_pueblo_nuevo_fa,Pueblo Nuevo,mun_falcon_fa,state_ve_fa,4111,PNU
+city_piritu_fa,Píritu,mun_piritu_fa,state_ve_fa,4112,PIR
+city_cabure_fa,Cabure,mun_petit_fa,state_ve_fa,4113,CAB
+city_santa_cruz_fa,Santa Cruz de Los Taques,mun_los_taques_fa,state_ve_fa,4114,SCR
+city_mene_mauroa_fa,Mene de Mauroa,mun_mauricio_baez_fa,state_ve_fa,4115,MEN
+city_chichiriviche_fa,Chichiriviche,mun_monseñor_iturriaga_fa,state_ve_fa,4116,CHI
+city_palmasola_fa,Palmasola,mun_palmasola_fa,state_ve_fa,4117,PAL
+city_tocopero_fa,Tocopero,mun_tocopero_fa,state_ve_fa,4118,TOC
+city_urumaco_fa,Urumaco,mun_uruma_fa,state_ve_fa,4119,URU
+city_casigua_fa,Casigua,mun_mauricio_baez_fa,state_ve_fa,4120,CAS
+city_yaracal_fa,Yaracal,mun_cacique_manaure_fa,state_ve_fa,4121,YAR
+city_boca_aroa_fa,Boca de Aroa,mun_silva_fa,state_ve_fa,4122,BAR
+city_puerto_cumarebo_fa,Puerto Cumarebo,mun_zamora_fa,state_ve_fa,4123,PTC
+city_san_francisco_fa,San Francisco,mun_san_francisco_fa,state_ve_fa,4124,SFR
+city_curimagua_fa,Curimagua,mun_petit_fa,state_ve_fa,4125,CUR
+city_san_juan_morros_gu,San Juan de los Morros,mun_juan_german_roscio_gu,state_ve_gu,2301,SJM
+city_valle_pascua_gu,Valle de la Pascua,mun_infante_gu,state_ve_gu,2350,VDP
+city_calabozo_gu,Calabozo,mun_francisco_de_miranda_gu,state_ve_gu,2312,CAL
+city_el_sombrero_gu,El Sombrero,mun_julian_mellado_gu,state_ve_gu,2331,ESM
+city_san_jose_gu,San José de Guaribe,mun_san_jose_gu,state_ve_gu,2341,SJG
+city_santa_maria_ipire_gu,Santa María de Ipire,mun_santa_maria_gu,state_ve_gu,2342,SMI
+city_camaguán_gu,Camaguán,mun_camaguán_gu,state_ve_gu,2336,CAM
+city_chaguaramas_gu,Chaguaramas,mun_chaguaramas_gu,state_ve_gu,2337,CHA
+city_el_socorro_gu,El Socorro,mun_el_socorro_gu,state_ve_gu,2338,ESO
+city_guayabal_gu,Guayabal,mun_guayabal_gu,state_ve_gu,2339,GUY
+city_las_mercedes_gu,Las Mercedes,mun_las_mercedes_gu,state_ve_gu,2340,LME
+city_ortiz_gu,Ortiz,mun_ortiz_gu,state_ve_gu,2303,ORT
+city_san_geronimo_gu,San Gerónimo de Guayabal,mun_san_geronimo_gu,state_ve_gu,2343,SGG
+city_altagracia_orituco_gu,Altagracia de Orituco,mun_mellado_gu,state_ve_gu,2315,ALT
+city_san_francisco_macaira_gu,San Francisco de Macaira,mun_ortiz_gu,state_ve_gu,2304,SFM
+city_barquisimeto_la,Barquisimeto,mun_iribarren_la,state_ve_la,3001,BAR
+city_cabudare_la,Cabudare,mun_palavecino_la,state_ve_la,3023,CAB
+city_quibor_la,Quíbor,mun_jimenez_la,state_ve_la,3050,QIB
+city_el_tocuyo_la,El Tocuyo,mun_moran_la,state_ve_la,3018,TOC
+city_carora_la,Carora,mun_torres_la,state_ve_la,3058,CAR
+city_siquisique_la,Siquisique,mun_urdaneta_la,state_ve_la,3059,SIQ
+city_sarare_la,Sarare,mun_simon_planas_la,state_ve_la,3021,SAR
+city_sanare_la,Sanare,mun_andres_eloy_blanco_la,state_ve_la,3024,SAN
+city_duaca_la,Duaca,mun_crespo_la,state_ve_la,3022,DUA
+city_merida_me,Mérida,mun_libertador_me,state_ve_me,5101,MER
+city_el_vigia_me,El Vigía,mun_alberto_adriani_me,state_ve_me,5145,EVG
+city_santa_cruz_mora_me,Santa Cruz de Mora,mun_antonio_pinto_salinas_me,state_ve_me,5133,SCM
+city_aricagua_me,Aricagua,mun_aricagua_me,state_ve_me,5131,ARI
+city_canagua_me,Canaguá,mun_arzobispo_chacon_me,state_ve_me,5132,CAN
+city_ejido_me,Ejido,mun_campo_elias_me,state_ve_me,5111,EJI
+city_tucani_me,Tucaní,mun_caracciolo_parra_olmedo_me,state_ve_me,5143,TUC
+city_santo_domingo_me,Santo Domingo,mun_cardenal_quintero_me,state_ve_me,5139,SDO
+city_guaraque_me,Guaraque,mun_guaraque_me,state_ve_me,5134,GUA
+city_arapuey_me,Arapuey,mun_julio_cesar_salas_me,state_ve_me,5141,ARP
+city_torondoy_me,Torondoy,mun_justo_briceno_me,state_ve_me,5142,TOR
+city_timotes_me,Timotes,mun_miranda_me,state_ve_me,5138,TIM
+city_santa_elena_arenales_me,Santa Elena de Arenales,mun_obispo_ramos_lora_me,state_ve_me,5144,SEA
+city_santa_maria_caparo_me,Santa María de Caparo,mun_padre_noguera_me,state_ve_me,5137,SMC
+city_mucuchies_me,Mucuchíes,mun_rangel_me,state_ve_me,5135,MUC
+city_bailadores_me,Bailadores,mun_rivas_davila_me,state_ve_me,5136,BAI
+city_tabay_me,Tabay,mun_santos_marquina_me,state_ve_me,5115,TAB
+city_lagunillas_me,Lagunillas,mun_sucre_me,state_ve_me,5140,LAG
+city_tovar_me,Tovar,mun_tovar_me,state_ve_me,5130,TOV
+city_nueva_bolivia_me,Nueva Bolivia,mun_tulio_febres_cordero_me,state_ve_me,5146,NBO
+city_zea_me,Zea,mun_ze_me,state_ve_me,5147,ZEA
+city_pueblo_llano_me,Pueblo Llano,mun_pueblo_llano_me,state_ve_me,5130,PLL
+city_los_teques_mi,Los Teques,mun_guaicaipuro_mi,state_ve_mi,1201,LTQ
+city_guarenas_mi,Guarenas,mun_plaza_mi,state_ve_mi,1220,GUA
+city_guatire_mi,Guatire,mun_zamora_mi,state_ve_mi,1221,GTR
+city_petare_mi,Petare,mun_sucre_mi,state_ve_mi,1070,PET
+city_baruta_mi,Baruta,mun_baruta_mi,state_ve_mi,1080,BAR
+city_chacao_mi,Chacao,mun_chacao_mi,state_ve_mi,1060,CHA
+city_el_hatillo_mi,El Hatillo,mun_el_hatillo_mi,state_ve_mi,1083,HAT
+city_charallave_mi,Charallave,mun_cristobal_rojas_mi,state_ve_mi,1210,CHA2
+city_cua_mi,Cúa,mun_urdaneta_mi,state_ve_mi,1211,CUA
+city_santa_lucia_mi,Santa Lucía,mun_paz_castillo_mi,state_ve_mi,1212,SLC
+city_ocumare_tuy_mi,Ocumare del Tuy,mun_lander_mi,state_ve_mi,1213,OCU
+city_san_antonio_altos_mi,San Antonio de los Altos,mun_los_salías_mi,state_ve_mi,1204,SAA
+city_higuerote_mi,Higuerote,mun_brion_mi,state_ve_mi,1231,HIG
+city_cupira_mi,Cúpira,mun_pedro_gual_mi,state_ve_mi,1232,CUP
+city_mamporal_mi,Mamporal,mun_buroz_mi,state_ve_mi,1233,MAP
+city_rio_chico_mi,Río Chico,mun_paez_mi,state_ve_mi,1234,RCH
+city_san_jose_barlovento_mi,San José de Barlovento,mun_andres_bello_mi,state_ve_mi,1235,SJB
+city_caucagua_mi,Caucagua,mun_acevedo_mi,state_ve_mi,1236,CAU
+city_santa_teresa_tuy_mi,Santa Teresa del Tuy,mun_independencia_mi,state_ve_mi,1214,STT
+city_san_francisco_yare_mi,San Francisco de Yare,mun_simon_bolivar_mi,state_ve_mi,1215,SFY
+city_santa_barbara_mi,Santa Bárbara,mun_lander_mi,state_ve_mi,1216,SBA
+city_maturin_mo,Maturín,mun_maturin_mo,state_ve_mo,6201,MAT
+city_san_antonio_mo,San Antonio de Maturín,mun_acosta_mo,state_ve_mo,6211,SAN
+city_aguasay_mo,Aguasay,mun_aguasay_mo,state_ve_mo,6221,AGU
+city_caripito_mo,Caripito,mun_bolivar_mo,state_ve_mo,6231,CAR
+city_caripe_mo,Caripe,mun_caripe_mo,state_ve_mo,6215,CAR2
+city_caicara_mo,Caicara de Maturín,mun_cedeno_mo,state_ve_mo,6212,CAI
+city_punta_mata_mo,Punta de Mata,mun_ezequiel_zamora_mo,state_ve_mo,6222,PDM
+city_temblador_mo,Temblador,mun_libertador_mo,state_ve_mo,6223,TEM
+city_aragua_mo,Aragua de Maturín,mun_piar_mo,state_ve_mo,6216,ARA
+city_quiriquire_mo,Quiriquire,mun_punceres_mo,state_ve_mo,6217,QUI
+city_santa_barbara_mo,Santa Bárbara,mun_santa_barbara_mo,state_ve_mo,6218,SBA
+city_barrancas_mo,Barrancas del Orinoco,mun_sotillo_mo,state_ve_mo,6224,BAR
+city_uracoa_mo,Uracoa,mun_uracoa_mo,state_ve_mo,6225,URA
+city_la_asuncion_ne,La Asunción,mun_arismendi_ne,state_ve_ne,6311,ASU
+city_porlamar_ne,Porlamar,mun_marino_ne,state_ve_ne,6301,POR
+city_pampatar_ne,Pampatar,mun_maneiro_ne,state_ve_ne,6316,PAM
+city_juan_griego_ne,Juan Griego,mun_marcano_ne,state_ve_ne,6309,JGR
+city_san_juan_bautista_ne,San Juan Bautista,mun_diaz_ne,state_ve_ne,6320,SJB
+city_santa_ana_ne,Santa Ana,mun_gomez_ne,state_ve_ne,6321,SAN
+city_paraguachi_ne,Paraguachí,mun_antolin_campo_ne,state_ve_ne,6322,PGI
+city_valle_espiritu_ne,El Valle del Espíritu Santo,mun_garcia_ne,state_ve_ne,6312,VAL
+city_boca_rio_ne,Boca de Río,mun_macanao_ne,state_ve_ne,6323,BDR
+city_punta_piedras_ne,Punta de Piedras,mun_tubores_ne,state_ve_ne,6324,PDP
+city_san_pedro_coche_ne,San Pedro de Coche,mun_villalba_ne,state_ve_ne,6325,SPC
+city_guanare_po,Guanare,mun_guanare_po,state_ve_po,3350,GUA
+city_acarigua_po,Acarigua,mun_paez_po,state_ve_po,3301,ACA
+city_araure_po,Araure,mun_araure_po,state_ve_po,3303,ARA
+city_villa_bruzual_po,Villa Bruzual,mun_turen_po,state_ve_po,3353,VBR
+city_biscucuy_po,Biscucuy,mun_sucre_po,state_ve_po,3352,BIS
+city_ospino_po,Ospino,mun_ospino_po,state_ve_po,3354,OSP
+city_guanarito_po,Guanarito,mun_guanarito_po,state_ve_po,3355,GTO
+city_boconoito_po,Boconoíto,mun_san_genaro_po,state_ve_po,3356,BOC
+city_san_rafael_onoto_po,San Rafael de Onoto,mun_san_rafael_onoto_po,state_ve_po,3307,SRO
+city_santa_rosalia_po,El Playón,mun_santa_rosalia_po,state_ve_po,3357,EPL
+city_papelon_po,Papelón,mun_papelon_po,state_ve_po,3358,PAP
+city_chabasquen_po,Paraíso de Chabasquén,mun_jose_vicente_unda_po,state_ve_po,3359,CHB
+city_agua_blanca_po,Agua Blanca,mun_agua_blanca_po,state_ve_po,3309,AGB
+city_esteller_po,Píritu,mun_esteller_po,state_ve_po,3308,PIR
+city_cumana_su,Cumaná,mun_sucre_su,state_ve_su,6101,CUM
+city_carupano_su,Carúpano,mun_bermudez_su,state_ve_su,6150,CAR
+city_rio_caribe_su,Río Caribe,mun_arismendi_su,state_ve_su,6151,RCA
+city_casanay_su,Casanay,mun_andres_eloy_blanco_su,state_ve_su,6161,CAS
+city_san_jose_areocuar_su,San José de Areocuar,mun_andres_mata_su,state_ve_su,6162,SJA
+city_el_pilar_su,El Pilar,mun_benitez_su,state_ve_su,6163,EPI
+city_mariguitar_su,Marigüitar,mun_bolivar_su,state_ve_su,6164,MGU
+city_yaguaraparo_su,Yaguaraparo,mun_cajigal_su,state_ve_su,6165,YAG
+city_araya_su,Araya,mun_cruz_salmeron_su,state_ve_su,6166,ARA
+city_tunapuy_su,Tunapuy,mun_libertador_su,state_ve_su,6167,TUN
+city_tariba_ta,Táriba,mun_cardenas_ta,state_ve_ta,5020,TAR
+city_rubio_ta,Rubio,mun_junin_ta,state_ve_ta,5030,RUB
+city_san_antonio_ta,San Antonio del Táchira,mun_bolivar_ta,state_ve_ta,5040,SAN
+city_urena_ta,Ureña,mun_pedro_maria_urena_ta,state_ve_ta,5048,URE
+city_la_fria_ta,La Fría,mun_garcia_hevia_ta,state_ve_ta,5050,LFR
+city_colon_ta,Colón,mun_ayacucho_ta,state_ve_ta,5052,COL
+city_la_grita_ta,La Grita,mun_jauregui_ta,state_ve_ta,5038,LGR
+city_queniquea_ta,Queniquea,mun_sucre_ta,state_ve_ta,5036,QEQ
+city_pregonero_ta,Pregonero,mun_uribante_ta,state_ve_ta,5034,PRE
+city_san_jose_bolivar_ta,San José de Bolívar,mun_francisco_de_miranda_ta,state_ve_ta,5032,SJB
+city_santa_ana_ta,Santa Ana del Táchira,mun_cordoba_ta,state_ve_ta,5022,SAN2
+city_michelena_ta,Michelena,mun_michelena_ta,state_ve_ta,5034,MIC
+city_capacho_nuevo_ta,Capacho Nuevo,mun_independencia_ta,state_ve_ta,5024,CAN
+city_capacho_viejo_ta,Capacho Viejo,mun_libertad_ta,state_ve_ta,5026,CAV
+city_abejales_ta,Abejales,mun_libertador_ta,state_ve_ta,5037,ABE
+city_coloncito_ta,Coloncito,mun_panamericano_ta,state_ve_ta,5054,COL2
+city_delicias_ta,Delicias,mun_rafael_urdaneta_ta,state_ve_ta,5039,DEL
+city_la_tendida_ta,La Tendida,mun_samuel_dario_maldonado_ta,state_ve_ta,5056,LTE
+city_cordero_ta,Cordero,mun_andres_bello_ta,state_ve_ta,5028,COR
+city_lobatera_ta,Lobatera,mun_lobatera_ta,state_ve_ta,5031,LOB
+city_san_jose_obrero_ta,San José Obrero,mun_san_cristobal_ta,state_ve_ta,5003,SJO3
+city_san_pablo_ta,San Pablo,mun_sucre_ta,state_ve_ta,5035,SPB
+city_san_felix_ta,San Félix,mun_ayacucho_ta,state_ve_ta,5053,SFX
+city_san_rafael_pinal_ta,San Rafael del Piñal,mun_fernandez_feo_ta,state_ve_ta,5055,SRP
+city_san_jose_ta,San José,mun_rafael_urdaneta_ta,state_ve_ta,5033,SJO
+city_san_judas_tadeo_ta,Umuquena,mun_san_judas_tadeo_ta,state_ve_ta,503A,UMU
+city_trujillo_tr,Trujillo,mun_trujillo_tr,state_ve_tr,3101,TRU
+city_valera_tr,Valera,mun_valera_tr,state_ve_tr,3103,VAL
+city_bocono_tr,Boconó,mun_bocono_tr,state_ve_tr,3104,BOC
+city_carvajal_tr,Carvajal,mun_carvajal_tr,state_ve_tr,3102,CVJ
+city_motatan_tr,Motatán,mun_motatan_tr,state_ve_tr,3105,MOT
+city_betijoque_tr,Betijoque,mun_rafael_rangel_tr,state_ve_tr,3106,BTJ
+city_sabana_mendoza_tr,Sabana de Mendoza,mun_sucre_tr,state_ve_tr,3107,SDM
+city_escuq_tr,Escuque,mun_escuq_tr,state_ve_tr,3108,ESC
+city_pampan_tr,Pampán,mun_pampan_tr,state_ve_tr,3109,PAM
+city_pampanito_tr,Pampanito,mun_pampanito_tr,state_ve_tr,3110,PPT
+city_la_ceiba_tr,La Ceiba,mun_la_ceiba_tr,state_ve_tr,3111,LCE
+city_monte_carmelo_tr,Monte Carmelo,mun_monte_carmelo_tr,state_ve_tr,3112,MCB
+city_miranda_tr,El Dividive,mun_miranda_tr,state_ve_tr,3113,DIV
+city_carache_tr,Carache,mun_carache_tr,state_ve_tr,3114,CAR
+city_chejende_tr,Chejendé,mun_candelaria_tr,state_ve_tr,3115,CHJ
+city_sabana_grande_tr,Sabana Grande,mun_bolivar_tr,state_ve_tr,3116,SGR
+city_santa_isabel_tr,Santa Isabel,mun_andres_bello_tr,state_ve_tr,3117,SIS
+city_la_quebrada_tr,La Quebrada,mun_urdaneta_tr,state_ve_tr,3118,LQB
+city_jose_felipe_tr,El Paradero,mun_jf_marquez_canizales_tr,state_ve_tr,3119,EPR
+city_campo_elias_tr,Campo Elías,mun_jv_campo_elias_tr,state_ve_tr,3120,CEL
+city_la_guaira_lg,La Guaira,mun_vargas_lg,state_ve_lg,1160,LAG
+city_san_felipe_ya,San Felipe,mun_san_felipe_ya,state_ve_ya,3201,SFE
+city_yaritagua_ya,Yaritagua,mun_pena_ya,state_ve_ya,3203,YAR
+city_chivacoa_ya,Chivacoa,mun_bruzual_ya,state_ve_ya,3202,CHI
+city_nirgua_ya,Nirgua,mun_nirgua_ya,state_ve_ya,3204,NIR
+city_aroa_ya,Aroa,mun_bolivar_ya,state_ve_ya,3205,ARO
+city_cocorote_ya,Cocorote,mun_cocorote_ya,state_ve_ya,3206,COC
+city_independencia_ya,Independencia,mun_independencia_ya,state_ve_ya,3207,IND
+city_sabana_parra_ya,Sabana de Parra,mun_jose_antonio_paez_ya,state_ve_ya,3208,SDP
+city_boraure_ya,Boraure,mun_la_trinidad_ya,state_ve_ya,3209,BOR
+city_yumare_ya,Yumare,mun_manuela_monge_ya,state_ve_ya,3210,YUM
+city_guama_ya,Guama,mun_sucre_ya,state_ve_ya,3211,GUA
+city_urachiche_ya,Urachiche,mun_urachiche_ya,state_ve_ya,3212,URA
+city_farriar_ya,Farriar,mun_veroes_ya,state_ve_ya,3213,FAR
+city_maracaibo_zu,Maracaibo,mun_maracaibo_zu,state_ve_zu,4001,MCB
+city_cabimas_zu,Cabimas,mun_cabimas_zu,state_ve_zu,4013,CAB
+city_ciudad_ojeda_zu,Ciudad Ojeda,mun_lagunillas_zu,state_ve_zu,4019,COJ
+city_san_francisco_zu,San Francisco,mun_san_francisco_zu,state_ve_zu,4005,SFR
+city_machiques_zu,Machiques,mun_machiques_zu,state_ve_zu,4020,MAC
+city_la_concepcion_zu,La Concepción,mun_jel_zu,state_ve_zu,4021,LCO
+city_santa_rita_zu,Santa Rita,mun_santa_rita_zu,state_ve_zu,4015,SRT
+city_bachaquero_zu,Bachaquero,mun_valmore_rodriguez_zu,state_ve_zu,4017,BCH
+city_tia_juana_zu,Tía Juana,mun_simon_bolivar_zu,state_ve_zu,4016,TJU
+city_san_carlos_zu,San Carlos del Zulia,mun_colon_zu,state_ve_zu,4022,SCA
+city_encontrados_zu,Encontrados,mun_catatumbo_zu,state_ve_zu,4023,ENC
+city_sinamaica_zu,Sinamaica,mun_guajira_zu,state_ve_zu,4024,SIN
+city_casigua_cubo_zu,Casigua El Cubo,mun_jms_zu,state_ve_zu,4025,CEC
+city_el_mojan_zu,El Moján,mun_mara_zu,state_ve_zu,4026,EMO
+city_la_villa_rosario_zu,La Villa del Rosario,mun_rosario_zu,state_ve_zu,4027,LVR
+city_altagracia_zu,Altagracia,mun_miranda_zu,state_ve_zu,4028,ALT
+city_pueblo_nuevo_zu,Pueblo Nuevo,mun_fj_pulgar_zu,state_ve_zu,4029,PNU
+city_el_toro_zu,El Toro,mun_almirante_padilla_zu,state_ve_zu,4030,ETO

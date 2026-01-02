@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_payment_register_form_inherit_exchange_rate" model="ir.ui.view">
+        <field name="name">account.payment.register.form.exchange.rate</field>
+        <field name="model">account.payment.register</field>
+        <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+
+        <field name="arch" type="xml">
+            <!-- Odoo 19: el form del wizard tiene un <group> directo -->
+            <xpath expr="//form/group" position="inside">
+                <field name="exchange_rate" readonly="1" groups="account.group_account_manager"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

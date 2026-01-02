@@ -1,0 +1,66 @@
+<odoo>
+  <record id="view_move_form_converted_totals_clean" model="ir.ui.view">
+    <field name="name">account.move.form.converted.totals.clean</field>
+    <field name="model">account.move</field>
+    <field name="inherit_id" ref="account.view_move_form"/>
+    <field name="arch" type="xml">
+
+      <xpath expr="//page[@id='invoice_tab']//group[hasclass('oe_subtotal_footer')]" position="inside">
+
+        <div class="o_converted_amounts"
+             style="display:flex; justify-content:flex-end; margin-bottom:10px; border:none;">
+
+          <!-- Contenedor del bloque -->
+          <div style="text-align:right; width:100%; min-width:220px;">
+
+            <h4 style="margin:0 0 6px 0; font-weight:600; white-space:nowrap;">
+              Totales convertidos
+            </h4>
+
+            <!-- Subtotal convertido -->
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+              <span style="white-space:nowrap; font-size:13px; color:#ccc;">
+                Subtotal convertido
+              </span>
+              <div style="min-width:90px; text-align:right;">
+                <field name="amount_untaxed_converted"
+                       widget="monetary"
+                       options="{'currency_field': 'converted_currency_id'}"
+                       readonly="1"/>
+              </div>
+            </div>
+
+            <!-- Impuestos convertidos -->
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+              <span style="white-space:nowrap; font-size:13px; color:#ccc;">
+                Impuestos convertidos
+              </span>
+              <div style="min-width:90px; text-align:right;">
+                <field name="amount_tax_converted"
+                       widget="monetary"
+                       options="{'currency_field': 'converted_currency_id'}"
+                       readonly="1"/>
+              </div>
+            </div>
+
+            <!-- Total convertido -->
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="white-space:nowrap; font-size:13px; color:#ccc;">
+                <strong>Total convertido</strong>
+              </span>
+              <div style="min-width:90px; text-align:right;">
+                <field name="amount_total_converted"
+                       widget="monetary"
+                       options="{'currency_field': 'converted_currency_id'}"
+                       readonly="1"/>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </xpath>
+
+    </field>
+  </record>
+</odoo>
