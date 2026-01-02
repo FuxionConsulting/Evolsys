@@ -1,4 +1,4 @@
-from . import template_ve
-from . import res_city
+# -*- coding: utf-8 -*-
 from . import res_partner
-from . import address
+from . import res_city
+from . import res_country_municipality

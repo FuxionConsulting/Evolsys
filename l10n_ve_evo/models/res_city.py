@@ -1,8 +1,10 @@
+# -*- coding: utf-8 -*-
 from odoo import models, fields
 
 class ResCity(models.Model):
     _name = 'res.city'
     _description = 'City'
+    _order = 'name'
 
     name = fields.Char(string='City', required=True, index=True)
     state_id = fields.Many2one('res.country.state', string='State', required=True, ondelete='cascade')

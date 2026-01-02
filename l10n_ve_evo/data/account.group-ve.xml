@@ -1,42 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
 
         <!-- ========================= -->
         <!--        ACTIVOS           -->
         <!-- ========================= -->
-        <record id="l10n_ve_evo_group_1" model="account.group">
+        <record id="l10n_evo_group_1" model="account.group">
             <field name="name">ACTIVOS</field>
         </record>
 
-        <record id="l10n_ve_evo_group_10" model="account.group">
+        <record id="l10n_evo_group_10" model="account.group">
             <field name="name">ACTIVOS CIRCULANTES</field>
-            <field name="parent_id" ref="l10n_ve_evo_group_1"/>
+            <field name="parent_id" ref="l10n_evo_group_1"/>
         </record>
 
-        <record id="l10n_ve_evo_group_11" model="account.group">
+        <record id="l10n_evo_group_11" model="account.group">
             <field name="name">Caja y Bancos</field>
-            <field name="parent_id" ref="l10n_ve_evo_group_10"/>
+            <field name="parent_id" ref="l10n_evo_group_10"/>
             <field name="code_prefix_start">110000</field>
             <field name="code_prefix_end">119999</field>
         </record>
 
-        <record id="l10n_ve_evo_group_12" model="account.group">
+        <record id="l10n_evo_group_12" model="account.group">
             <field name="name">Inversiones</field>
-            <field name="parent_id" ref="l10n_ve_evo_group_10"/>
+            <field name="parent_id" ref="l10n_evo_group_10"/>
             <field name="code_prefix_start">120000</field>
             <field name="code_prefix_end">129999</field>
         </record>
 
-        <record id="l10n_ve_evo_group_14" model="account.group">
+        <record id="l10n_evo_group_14" model="account.group">
             <field name="name">Inventarios</field>
-            <field name="parent_id" ref="l10n_ve_evo_group_10"/>
+            <field name="parent_id" ref="l10n_evo_group_10"/>
             <field name="code_prefix_start">140000</field>
             <field name="code_prefix_end">149999</field>
         </record>
 
-        <record id="l10n_ve_evo_group_15" model="account.group">
+        <record id="l10n_evo_group_15" model="account.group">
             <field name="name">Propiedad Planta y Equipo</field>
-            <field name="parent_id" ref="l10n_ve_evo_group_10"/>
+            <field name="parent_id" ref="l10n_evo_group_10"/>
             <field name="code_prefix_start">150000</field>
             <field name="code_prefix_end">159999</field>
         </record>
@@ -44,20 +45,20 @@
         <!-- ========================= -->
         <!--         PASIVOS          -->
         <!-- ========================= -->
-        <record id="l10n_ve_evo_group_2" model="account.group">
+        <record id="l10n_evo_group_2" model="account.group">
             <field name="name">PASIVOS</field>
         </record>
 
-        <record id="l10n_ve_evo_group_21" model="account.group">
+        <record id="l10n_evo_group_21" model="account.group">
             <field name="name">PASIVOS CORRIENTES</field>
-            <field name="parent_id" ref="l10n_ve_evo_group_2"/>
+            <field name="parent_id" ref="l10n_evo_group_2"/>
             <field name="code_prefix_start">210000</field>
             <field name="code_prefix_end">219999</field>
         </record>
 
-        <record id="l10n_ve_evo_group_22" model="account.group">
+        <record id="l10n_evo_group_22" model="account.group">
             <field name="name">PASIVOS NO CORRIENTES</field>
-            <field name="parent_id" ref="l10n_ve_evo_group_2"/>
+            <field name="parent_id" ref="l10n_evo_group_2"/>
             <field name="code_prefix_start">220000</field>
             <field name="code_prefix_end">229999</field>
         </record>
@@ -65,14 +66,14 @@
         <!-- ========================= -->
         <!--       PATRIMONIO         -->
         <!-- ========================= -->
-        <record id="l10n_ve_evo_group_3" model="account.group">
+        <record id="l10n_evo_group_3" model="account.group">
             <field name="name">PATRIMONIO</field>
         </record>
 
         <!-- ========================= -->
         <!--        INGRESOS          -->
         <!-- ========================= -->
-        <record id="l10n_ve_evo_group_4" model="account.group">
+        <record id="l10n_evo_group_4" model="account.group">
             <field name="name">INGRESOS</field>
             <field name="code_prefix_start">400000</field>
             <field name="code_prefix_end">499999</field>
@@ -81,7 +82,7 @@
         <!-- ========================= -->
         <!--     COSTO DE VENTA       -->
         <!-- ========================= -->
-        <record id="l10n_ve_evo_group_5" model="account.group">
+        <record id="l10n_evo_group_5" model="account.group">
             <field name="name">COSTO DE VENTA</field>
             <field name="code_prefix_start">500000</field>
             <field name="code_prefix_end">599999</field>
@@ -90,7 +91,7 @@
         <!-- ========================= -->
         <!--         GASTOS           -->
         <!-- ========================= -->
-        <record id="l10n_ve_evo_group_6" model="account.group">
+        <record id="l10n_evo_group_6" model="account.group">
             <field name="name">GASTOS DE OPERACION</field>
             <field name="code_prefix_start">600000</field>
             <field name="code_prefix_end">699999</field>
@@ -99,7 +100,7 @@
         <!-- ========================= -->
         <!-- OTROS INGRESOS Y GASTOS  -->
         <!-- ========================= -->
-        <record id="l10n_ve_evo_group_7" model="account.group">
+        <record id="l10n_evo_group_7" model="account.group">
             <field name="name">OTROS INGRESOS Y GASTOS</field>
             <field name="code_prefix_start">700000</field>
             <field name="code_prefix_end">799999</field>
@@ -108,7 +109,7 @@
         <!-- ========================= -->
         <!--     CUENTAS DE CIERRE    -->
         <!-- ========================= -->
-        <record id="l10n_ve_evo_group_99" model="account.group">
+        <record id="l10n_evo_group_99" model="account.group">
             <field name="name">CUENTAS DE CIERRE</field>
             <field name="code_prefix_start">999000</field>
             <field name="code_prefix_end">999999</field>
