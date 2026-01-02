@@ -1,6 +1,4 @@
-from . import res_partner
+from . import template_ve
 from . import res_city
-from . import res_country_municipality
-#from . import paquete
-from . import template_ve 
-
+from . import res_partner
+from . import address

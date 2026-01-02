@@ -1,0 +1,4 @@
+id,sequence,name,auto_apply,country_id,vat_required
+l10n_ve_evo_domestic_fp,10,VE - Domestico (Ordinario),1,Venezuela,0
+l10n_ve_evo_contribuyente_fp,20,VE - Contribuyente Especial,0,Venezuela,1
+l10n_ve_evo_export_fp,25,VE - Exportación (Exento),0,Venezuela,0

@@ -1,5 +1,4 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create
-l10n_ve_evo_access_res_city_user,access_res_city_user,model_res_city,base.group_user,1,1,1
-l10n_ve_evo_access_res_country_municipality_user,access_res_country_municipality_user,model_res_country_municipality,base.group_user,1,1,1
-l10n_ve_evo_access_res_country_parish_user,access_res_country_parish_user,model_res_country_parish,base.group_user,1,1,1
-l10n_ve_evo_access_account_tax_readonly,account.tax read only for locked group,res.config.settings,l10n_ve_evo.group_lock_fiscal_package,1,0,0
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_city,res.city,model_res_city,base.group_user,1,1,1,1
+access_res_country_parish,res.country.parish,model_res_country_parish,base.group_user,1,1,1,1
+access_res_country_municipality,res.country.municipality,model_res_country_municipality,base.group_user,1,1,1,1

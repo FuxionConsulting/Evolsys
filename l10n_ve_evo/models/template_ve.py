@@ -1,89 +1,106 @@
 # -*- coding: utf-8 -*-
-from odoo import api, SUPERUSER_ID, _
-import logging
+from odoo import models, _
+from odoo.addons.account.models.chart_template import template
+from odoo.tools.misc import file_open
 
-_logger = logging.getLogger(__name__)
+class AccountChartTemplate(models.AbstractModel):
+    _inherit = 'account.chart.template'
 
-MODULE = 'l10n_ve_evo'
+    @template('ve')
+    def _get_ve_template_data(self):
+        """
+        Define la configuración básica para el Plan de Cuentas de Venezuela.
+        """
+        return {
+            # Se usa 've_chart_template' como ID externo para que el hook pueda referenciarlo.
+            'name': _('VE Standard (EVO)'),
+            'visible': True, # Visible para que el usuario pueda seleccionarlo
+            'code_digits': '6',
+            # Cuentas Contables Clave (IDs deben coincidir con account.account-ve.csv)
+            # 130000: Cuentas por Cobrar - Clientes
+            'property_account_receivable_id': 'l10n_ve_evo_130000', 
+            # 210000: Cuentas por Pagar - Proveedores
+            'property_account_payable_id': 'l10n_ve_evo_210000',     
+            'downpayment_account_id': 'l10n_ve_evo_115000',          # Anticipos (Activo)
+        }
 
-# Lista de xml ids que queremos asegurar estén presentes cuando se instale el paquete fiscal.
-XML_IDS_TO_CHECK = [
-    # grupos de cuentas
-    'l10n_ve_evo_group_1', 'l10n_ve_evo_group_10', 'l10n_ve_evo_group_11',
-    # cuentas
-    'l10n_ve_evo_110000', 'l10n_ve_evo_111000', 'l10n_ve_evo_114000',
-    'l10n_ve_evo_115000', 'l10n_ve_evo_130000', 'l10n_ve_evo_140000',
-    'l10n_ve_evo_151100', 'l10n_ve_evo_159000', 'l10n_ve_evo_210000',
-    'l10n_ve_evo_214000', 'l10n_ve_evo_215000', 'l10n_ve_evo_270000',
-    'l10n_ve_evo_290000', 'l10n_ve_evo_310000', 'l10n_ve_evo_390000',
-    'l10n_ve_evo_410000', 'l10n_ve_evo_420000', 'l10n_ve_evo_490000',
-    'l10n_ve_evo_511000', 'l10n_ve_evo_601000', 'l10n_ve_evo_611100',
-    'l10n_ve_evo_621000', 'l10n_ve_evo_700000', 'l10n_ve_evo_710000',
-    'l10n_ve_evo_720000', 'l10n_ve_evo_730000', 'l10n_ve_evo_740000',
-    # journals
-    'l10n_ve_evo_stock_journal', 'l10n_ve_evo_stock_valuation_journal',
-    # tax groups
-    'l10n_ve_evo_tax_group_iva_16', 'l10n_ve_evo_tax_group_iva_8', 'l10n_ve_evo_tax_group_exento',
-    # taxes
-    'l10n_ve_evo_iva_sale_16', 'l10n_ve_evo_iva_purchase_16',
-    'l10n_ve_evo_iva_sale_8', 'l10n_ve_evo_iva_sale_exento',
-    # fiscal positions
-    'l10n_ve_evo_domestic_fp', 'l10n_ve_evo_contribuyente_fp', 'l10n_ve_evo_export_fp',
-]
+    @template('ve', 'res.company')
+    def _get_ve_res_company(self):
+        """
+        Configura la compañía con cuentas predeterminadas.
+        Se utiliza la estructura de diccionario anidado que Odoo espera para el modelo res.company.
+        """
+        return {
+            'base.main_company': { # Clave: ID de la compañía principal
+                'account_fiscal_country_id': 'base.ve', # Referencia al país VE
+                'account_sale_tax_id': 'iva_sale_16',        # IVA Venta 16% 
+                'account_purchase_tax_id': 'iva_purchase_16',  # IVA Compra 16% 
+                
+                # Cuentas de Moneda y Descuentos
+                'income_currency_exchange_account_id': 'l10n_ve_evo_750000',
+                'expense_currency_exchange_account_id': 'l10n_ve_evo_650000',
+                'account_journal_early_pay_discount_gain_account_id': 'l10n_ve_evo_780000', 
+                'account_journal_early_pay_discount_loss_account_id': 'l10n_ve_evo_680000', 
 
-def _ensure_records_exist(env):
-    """Verifica que los xml ids listados existan en la base y registra advertencias si faltan."""
-    missing = []
-    for xml_id in XML_IDS_TO_CHECK:
-        full_xmlid = '%s.%s' % (MODULE, xml_id)
-        try:
-            res = env.ref(full_xmlid, raise_if_not_found=False)
-            if not res:
-                missing.append(full_xmlid)
-        except Exception as e:
-            _logger.exception("Error comprobando xmlid %s: %s", full_xmlid, e)
-            missing.append(full_xmlid)
-    if missing:
-        _logger.warning(
-            "Los siguientes xml ids no se encontraron en la base tras instalar %s: %s",
-            MODULE, ', '.join(missing)
-        )
-    else:
-        _logger.info("Todos los xml ids esperados para %s están presentes.", MODULE)
+                # Otras Cuentas
+                'transfer_account_id': 'l10n_ve_evo_114000', # Cuenta Puente
+                'account_journal_suspense_account_id': 'l10n_ve_evo_270000', # Cuenta de Suspenso
+                'expense_account_id': 'l10n_ve_evo_600000', 
+                'expense_depreciation_account_id': 'l10n_ve_evo_690000', 
+                'income_account_id': 'l10n_ve_evo_700000', 
+                
+                # Cuentas relacionadas con Inventario
+                'account_stock_journal_id': 'inventory_valuation', # Diario predefinido por Odoo
+                'account_stock_valuation_id': 'l10n_ve_evo_140000', # Inventario (Activo)
+                
+                # Cuenta POS (Punto de Venta)
+                'account_default_pos_receivable_account_id': 'l10n_ve_evo_130000', 
+            }
+        }
 
-def _post_init_install(env):
-    """Acciones a ejecutar tras la instalación del módulo o al instalar el paquete fiscal."""
-    _logger.info("Iniciando post-init hook para %s", MODULE)
-    _ensure_records_exist(env)
+    @template('ve', 'account.journal')
+    def _get_ve_account_journal(self):
+        """
+        Configura los diarios predeterminados (Venta, Compra, Efectivo, Banco)
+        e incluye el campo 'code' (Prefijo de secuencia) obligatorio.
+        """
+        return {
+            'bank': {
+                'name': _('Banco Principal USD'), # Nombre ajustado para reflejar USD
+                'type': 'bank',
+                'code': 'USS', # Campo 'code' obligatorio
+                'default_account_id': 'l10n_ve_evo_111000', # Cuenta de Caja/Banco USD
+            },
+            'cash': {
+                'name': _('Efectivo VEB'),
+                'type': 'cash',
+                'code': 'EFF', # Campo 'code' obligatorio
+                'default_account_id': 'l10n_ve_evo_110000', # Cuenta de Caja/Banco VEB
+            },
+            'sale': {
+                'name': _('Ventas'),
+                'type': 'sale',
+                'code': 'VTA', # Campo 'code' obligatorio
+                'refund_sequence': True,
+            },
+            'purchase': {
+                'name': _('Compras'),
+                'type': 'purchase',
+                'code': 'COM', # Campo 'code' obligatorio
+                'refund_sequence': True,
+            },
+            'misc': {
+                'name': _('Asientos Varios'),
+                'type': 'general',
+                'code': 'MISL', # Diario general (importante)
+            },
+        }
 
-    try:
-        taxes = [
-            'l10n_ve_evo.l10n_ve_evo_iva_sale_16',
-            'l10n_ve_evo.l10n_ve_evo_iva_purchase_16',
-            'l10n_ve_evo.l10n_ve_evo_iva_sale_8',
-            'l10n_ve_evo.l10n_ve_evo_iva_sale_exento',
-        ]
-        for xmlid in taxes:
-            tax = env.ref(xmlid, raise_if_not_found=False)
-            if tax and not tax.active:
-                tax.active = True
-                _logger.info("Activado impuesto %s", xmlid)
-    except Exception:
-        _logger.exception("Error activando impuestos en post init")
-
-def _uninstall_cleanup(env):
-    """Limpieza al desinstalar el módulo (no borra datos por seguridad)."""
-    _logger.info(
-        "Ejecutando uninstall hook para %s. No se eliminarán registros automáticamente.",
-        MODULE
-    )
-
-def _post_init_hook(cr, registry):
-    """Hook que Odoo llama tras instalar el módulo."""
-    env = api.Environment(cr, SUPERUSER_ID, {})
-    _post_init_install(env)
-
-def uninstall_hook(cr, registry):
-    """Hook que Odoo llama al desinstalar el módulo."""
-    env = api.Environment(cr, SUPERUSER_ID, {})
-    _uninstall_cleanup(env)
+#    @template('ve', 'account.chart.template')
+#    def _set_template_ref(self):
+#        """
+#        Define el ID externo del gráfico para que pueda ser referenciado por el hook.
+#        """
+#        return {
+#            'l10n_ve_evo.ve_chart_template': self,
+#        }
