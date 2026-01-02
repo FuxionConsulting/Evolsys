@@ -1,58 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <data noupdate="0">
+  <data noupdate="1">
 
     <!-- ACTIVOS -->
-    <record id="l10n_ve_evo_110000" model="account.account">
+    <record id="l10n_evo_110000" model="account.account">
       <field name="name">Caja y Bancos VEB</field>
       <field name="code">110000</field>
       <field name="account_type">asset_current</field>
       <field name="reconcile">True</field>
     </record>
 
-    <record id="l10n_ve_evo_111000" model="account.account">
+    <record id="l10n_evo_111000" model="account.account">
       <field name="name">Caja y Bancos USD</field>
       <field name="code">111000</field>
       <field name="account_type">asset_current</field>
       <field name="reconcile">True</field>
     </record>
 
-    <record id="l10n_ve_evo_114000" model="account.account">
+    <record id="l10n_evo_114000" model="account.account">
       <field name="name">Cuenta Puente</field>
       <field name="code">114000</field>
       <field name="account_type">asset_current</field>
       <field name="reconcile">True</field>
     </record>
 
-    <record id="l10n_ve_evo_115000" model="account.account">
+    <record id="l10n_evo_115000" model="account.account">
       <field name="name">Anticipos (Activo)</field>
       <field name="code">115000</field>
       <field name="account_type">asset_prepayments</field>
       <field name="reconcile">False</field>
     </record>
 
-    <record id="l10n_ve_evo_130000" model="account.account">
+    <record id="l10n_evo_130000" model="account.account">
       <field name="name">Cuentas por Cobrar - Clientes</field>
       <field name="code">130000</field>
       <field name="account_type">asset_receivable</field>
       <field name="reconcile">True</field>
     </record>
 
-    <record id="l10n_ve_evo_140000" model="account.account">
+    <record id="l10n_evo_140000" model="account.account">
       <field name="name">Inventario de Mercancías</field>
       <field name="code">140000</field>
       <field name="account_type">asset_current</field>
       <field name="reconcile">False</field>
     </record>
 
-    <record id="l10n_ve_evo_151100" model="account.account">
+    <record id="l10n_evo_151100" model="account.account">
       <field name="name">Propiedad Planta y Equipo</field>
       <field name="code">151100</field>
       <field name="account_type">asset_fixed</field>
       <field name="reconcile">False</field>
     </record>
 
-    <record id="l10n_ve_evo_159000" model="account.account">
+    <record id="l10n_evo_159000" model="account.account">
       <field name="name">Depreciación Acumulada</field>
       <field name="code">159000</field>
       <field name="account_type">asset_non_current</field>
@@ -60,35 +60,35 @@
     </record>
 
     <!-- PASIVOS -->
-    <record id="l10n_ve_evo_210000" model="account.account">
+    <record id="l10n_evo_210000" model="account.account">
       <field name="name">Cuentas por Pagar - Proveedores</field>
       <field name="code">210000</field>
       <field name="account_type">liability_payable</field>
       <field name="reconcile">True</field>
     </record>
 
-    <record id="l10n_ve_evo_214000" model="account.account">
+    <record id="l10n_evo_214000" model="account.account">
       <field name="name">IVA por Pagar (Ventas)</field>
       <field name="code">214000</field>
       <field name="account_type">liability_current</field>
       <field name="reconcile">False</field>
     </record>
 
-    <record id="l10n_ve_evo_215000" model="account.account">
+    <record id="l10n_evo_215000" model="account.account">
       <field name="name">IVA Crédito Fiscal (Compras)</field>
       <field name="code">215000</field>
       <field name="account_type">liability_current</field>
       <field name="reconcile">False</field>
     </record>
 
-    <record id="l10n_ve_evo_270000" model="account.account">
+    <record id="l10n_evo_270000" model="account.account">
       <field name="name">Cuenta de Suspenso</field>
       <field name="code">270000</field>
       <field name="account_type">liability_current</field>
       <field name="reconcile">True</field>
     </record>
 
-    <record id="l10n_ve_evo_290000" model="account.account">
+    <record id="l10n_evo_290000" model="account.account">
       <field name="name">Impuestos Retenidos por Pagar</field>
       <field name="code">290000</field>
       <field name="account_type">liability_current</field>
@@ -96,14 +96,14 @@
     </record>
 
     <!-- PATRIMONIO -->
-    <record id="l10n_ve_evo_310000" model="account.account">
+    <record id="l10n_evo_310000" model="account.account">
       <field name="name">Capital Social</field>
       <field name="code">310000</field>
       <field name="account_type">equity</field>
       <field name="reconcile">False</field>
     </record>
 
-    <record id="l10n_ve_evo_390000" model="account.account">
+    <record id="l10n_evo_390000" model="account.account">
       <field name="name">Resultado del Ejercicio Anterior</field>
       <field name="code">390000</field>
       <field name="account_type">equity</field>
@@ -111,21 +111,21 @@
     </record>
 
     <!-- INGRESOS -->
-    <record id="l10n_ve_evo_410000" model="account.account">
+    <record id="l10n_evo_410000" model="account.account">
       <field name="name">Venta de Bienes</field>
       <field name="code">410000</field>
       <field name="account_type">income</field>
       <field name="reconcile">False</field>
     </record>
 
-    <record id="l10n_ve_evo_420000" model="account.account">
+    <record id="l10n_evo_420000" model="account.account">
       <field name="name">Venta de Servicios</field>
       <field name="code">420000</field>
       <field name="account_type">income</field>
       <field name="reconcile">False</field>
     </record>
 
-    <record id="l10n_ve_evo_490000" model="account.account">
+    <record id="l10n_evo_490000" model="account.account">
       <field name="name">Descuentos en Ventas</field>
       <field name="code">490000</field>
       <field name="account_type">income_other</field>
@@ -133,7 +133,7 @@
     </record>
 
     <!-- COSTOS -->
-    <record id="l10n_ve_evo_511000" model="account.account">
+    <record id="l10n_evo_511000" model="account.account">
       <field name="name">Costo de Venta</field>
       <field name="code">511000</field>
       <field name="account_type">expense_direct_cost</field>
@@ -141,21 +141,21 @@
     </record>
 
     <!-- GASTOS -->
-    <record id="l10n_ve_evo_601000" model="account.account">
+    <record id="l10n_evo_601000" model="account.account">
       <field name="name">Gastos de Personal</field>
       <field name="code">601000</field>
       <field name="account_type">expense</field>
       <field name="reconcile">False</field>
     </record>
 
-    <record id="l10n_ve_evo_611100" model="account.account">
+    <record id="l10n_evo_611100" model="account.account">
       <field name="name">Gastos Administrativos</field>
       <field name="code">611100</field>
       <field name="account_type">expense</field>
       <field name="reconcile">False</field>
     </record>
 
-    <record id="l10n_ve_evo_621000" model="account.account">
+    <record id="l10n_evo_621000" model="account.account">
       <field name="name">Gastos de Depreciación</field>
       <field name="code">621000</field>
       <field name="account_type">expense_depreciation</field>
@@ -163,35 +163,28 @@
     </record>
 
     <!-- OTROS INGRESOS Y GASTOS -->
-    <record id="l10n_ve_evo_700000" model="account.account">
-      <field name="name">Ingresos varios</field>
-      <field name="code">700000</field>
-      <field name="account_type">income_other</field>
-      <field name="reconcile">False</field>
-    </record>
-
-    <record id="l10n_ve_evo_710000" model="account.account">
+    <record id="l10n_evo_710000" model="account.account">
       <field name="name">Intereses Ganados</field>
       <field name="code">710000</field>
       <field name="account_type">income_other</field>
       <field name="reconcile">False</field>
     </record>
 
-    <record id="l10n_ve_evo_720000" model="account.account">
+    <record id="l10n_evo_720000" model="account.account">
       <field name="name">Pérdida por Venta de Activos</field>
       <field name="code">720000</field>
       <field name="account_type">expense_other</field>
       <field name="reconcile">False</field>
     </record>
 
-    <record id="l10n_ve_evo_730000" model="account.account">
+    <record id="l10n_evo_730000" model="account.account">
       <field name="name">Diferencia Cambiaria Ganada</field>
       <field name="code">730000</field>
       <field name="account_type">income_other</field>
       <field name="reconcile">False</field>
     </record>
 
-    <record id="l10n_ve_evo_740000" model="account.account">
+    <record id="l10n_evo_740000" model="account.account">
       <field name="name">Diferencia Cambiaria Perdida</field>
       <field name="code">740000</field>
       <field name="account_type">expense_other</field>
