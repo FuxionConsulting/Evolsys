@@ -39,7 +39,8 @@
     ],
  
 
-   
+    'post_init_hook': '_post_init_hook',
+    'uninstall_hook': 'uninstall_hook',
     'auto_install': False,
     'installable': True,
     'images': ['static/description/icon.png'],
