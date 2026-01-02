@@ -1,0 +1,27 @@
+id,code,name,account_type,reconcile,company_ids/id
+l10n_ve_evo_110000,110000,Caja y Bancos VEB,asset_current,True,base.main_company
+l10n_ve_evo_111000,111000,Caja y Bancos USD,asset_current,True,base.main_company
+l10n_ve_evo_114000,114000,Cuenta Puente,asset_current,True,base.main_company
+l10n_ve_evo_115000,115000,Anticipos (Activo),asset_prepayments,False,base.main_company
+l10n_ve_evo_130000,130000,Cuentas por Cobrar - Clientes,asset_receivable,True,base.main_company
+l10n_ve_evo_140000,140000,Inventario de Mercancías,asset_current,False,base.main_company
+l10n_ve_evo_151100,151100,Propiedad Planta y Equipo,asset_fixed,False,base.main_company
+l10n_ve_evo_159000,159000,Depreciación Acumulada,asset_non_current,False,base.main_company
+l10n_ve_evo_210000,210000,Cuentas por Pagar - Proveedores,liability_payable,True,base.main_company
+l10n_ve_evo_214000,214000,IVA por Pagar (Ventas),liability_current,False,base.main_company
+l10n_ve_evo_215000,215000,IVA Crédito Fiscal (Compras),liability_current,False,base.main_company
+l10n_ve_evo_270000,270000,Cuenta de Suspenso,liability_current,True,base.main_company
+l10n_ve_evo_290000,290000,Impuestos Retenidos por Pagar,liability_current,False,base.main_company
+l10n_ve_evo_310000,310000,Capital Social,equity,False,base.main_company
+l10n_ve_evo_390000,390000,Resultado del Ejercicio Anterior,equity,False,base.main_company
+l10n_ve_evo_410000,410000,Venta de Bienes,income,False,base.main_company
+l10n_ve_evo_420000,420000,Venta de Servicios,income,False,base.main_company
+l10n_ve_evo_490000,490000,Descuentos en Ventas,income_other,False,base.main_company
+l10n_ve_evo_511000,511000,Costo de Venta,expense_direct_cost,False,base.main_company
+l10n_ve_evo_601000,601000,Gastos de Personal,expense,False,base.main_company
+l10n_ve_evo_611100,611100,Gastos Administrativos,expense,False,base.main_company
+l10n_ve_evo_621000,621000,Gastos de Depreciación,expense_depreciation,False,base.main_company
+l10n_ve_evo_710000,710000,Intereses Ganados,income_other,False,base.main_company
+l10n_ve_evo_720000,720000,Pérdida por Venta de Activos,expense_other,False,base.main_company
+l10n_ve_evo_730000,730000,Diferencia Cambiaria Ganada,income_other,False,base.main_company
+l10n_ve_evo_740000,740000,Diferencia Cambiaria Perdida,expense_other,False,base.main_company
