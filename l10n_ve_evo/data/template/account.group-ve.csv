@@ -1,0 +1,16 @@
+id,code_prefix_start,code_prefix_end,name
+l10n_ve_evo_group_1,100000,100999,ACTIVOS
+l10n_ve_evo_group_10,101000,109999,ACTIVOS CIRCULANTES
+l10n_ve_evo_group_11,110000,119999,Caja y Bancos
+l10n_ve_evo_group_12,120000,129999,Inversiones
+l10n_ve_evo_group_14,140000,149999,Inventarios
+l10n_ve_evo_group_15,150000,159999,Propiedad Planta y Equipo
+l10n_ve_evo_group_2,200000,209999,PASIVOS
+l10n_ve_evo_group_21,210000,219999,PASIVOS CORRIENTES
+l10n_ve_evo_group_22,220000,229999,PASIVOS NO CORRIENTES
+l10n_ve_evo_group_3,300000,399999,PATRIMONIO
+l10n_ve_evo_group_4,400000,499999,INGRESOS
+l10n_ve_evo_group_5,500000,599999,COSTO DE VENTA
+l10n_ve_evo_group_6,600000,699999,GASTOS DE OPERACION
+l10n_ve_evo_group_7,700000,799999,OTROS INGRESOS Y GASTOS
+l10n_ve_evo_group_99,999000,999999,CUENTAS DE CIERRE

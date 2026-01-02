@@ -1,41 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <data>
-    <record id="l10n_ve_evo_view_partner_form_company" model="ir.ui.view">
-      <field name="name">res.partner.form.l10n.ve.company</field>
-      <field name="model">res.partner</field>
-      <field name="inherit_id" ref="base.view_partner_form"/>
-      <field name="arch" type="xml">
 
-        <!-- Insertar rif_type antes de vat (visible solo cuando no es persona) -->
-        <xpath expr="//field[@name='vat']" position="before">
-          <field name="rif_type">
-            <attribute name="modifiers">{'invisible': [('company_type', '=', 'person')]}</attribute>
-          </field>
-        </xpath>
+    <record id="view_partner_form_l10n_ve_company" model="ir.ui.view">
+        <field name="name">res.partner.form.l10n.ve.company</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
 
-        <!-- Modificar VAT (placeholder RIF para VE) -->
-        <xpath expr="//field[@name='vat']" position="attributes">
-          <attribute name="placeholder">RIF</attribute>
-          <attribute name="modifiers">{'invisible': [('country_id', '!=', ref('base.ve'))]}</attribute>
-        </xpath>
+        <field name="arch" type="xml">
 
-        <!-- Campos geográficos -->
-        <xpath expr="//field[@name='state_id']" position="after">
-          <field name="city_id" placeholder="Ciudad" options="{'no_create': True}" domain="[('state_id','=',state_id)]">
-            <attribute name="modifiers">{'invisible': [('country_id', '!=', ref('base.ve'))]}</attribute>
-          </field>
+            <!-- Insertar rif_type antes de vat (visible solo cuando no es persona) -->
+            <xpath expr="//field[@name='vat']" position="before">
+                <field name="rif_type">
+                    <modifiers>
+                        {"invisible": [["company_type", "=", "person"]]}
+                    </modifiers>
+                </field>
+            </xpath>
 
-          <field name="municipality_id" placeholder="Municipio" options="{'no_create': True}" domain="[('state_id','=',state_id)]">
-            <attribute name="modifiers">{'invisible': [('country_id', '!=', ref('base.ve'))]}</attribute>
-          </field>
+            <!-- Modificar VAT (etiqueta RIF para VE) -->
+            <xpath expr="//field[@name='vat']" position="attributes">
+                <attribute name="placeholder">RIF</attribute>
+                <attribute name="invisible">country_id != %(base.ve)d</attribute>
+            </xpath>
 
-          <field name="parish_id" placeholder="Parroquia" options="{'no_create': True}" domain="[('municipality_id','=',municipality_id)]">
-            <attribute name="modifiers">{'invisible': [('country_id', '!=', ref('base.ve'))]}</attribute>
-          </field>
-        </xpath>
+            <!-- Campos geográficos -->
+            <xpath expr="//field[@name='state_id']" position="after">
 
-      </field>
+                <field name="city_id"
+                       placeholder="Ciudad"
+                       options="{'no_create': True}"
+                       domain="[('state_id', '=', state_id)]">
+                    <modifiers>
+                        {"invisible": [["country_id", "!=", "%(base.ve)d"]]}
+                    </modifiers>
+                </field>
+
+                <field name="municipality_id"
+                       placeholder="Municipio"
+                       options="{'no_create': True}"
+                       domain="[('state_id', '=', state_id)]">
+                    <modifiers>
+                        {"invisible": [["country_id", "!=", "%(base.ve)d"]]}
+                    </modifiers>
+                </field>
+
+                <field name="parish_id"
+                       placeholder="Parroquia"
+                       options="{'no_create': True}"
+                       domain="[('municipality_id', '=', municipality_id)]">
+                    <modifiers>
+                        {"invisible": [["country_id", "!=", "%(base.ve)d"]]}
+                    </modifiers>
+                </field>
+
+            </xpath>
+
+        </field>
     </record>
-  </data>
+
 </odoo>
