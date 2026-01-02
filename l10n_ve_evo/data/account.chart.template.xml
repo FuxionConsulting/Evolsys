@@ -2,41 +2,41 @@
 <odoo>
   <data noupdate="1">
     <!--
-      Plantilla de plan de cuentas para l10n_evo.
-      Id del record: ve_chart_template  -> referenciable como l10n_evo.ve_chart_template
+      Plantilla de plan de cuentas para l10n__ve_evo.
+      Id del record: ve_chart_template  -> referenciable como l10n__ve_evo.ve_chart_template
       El hook post_init intentará completar/ajustar campos adicionales si es necesario.
     -->
     <record id="ve_chart_template" model="account.chart.template">
-      <field name="name">Venezuela - EVO (l10n_evo)</field>
+      <field name="name">Venezuela - EVO (l10n__ve_evo)</field>
       <field name="code_digits">6</field>
       <field name="country_id" ref="base.ve"/>
       <field name="currency_id" ref="base.VES"/>
       <field name="sequence">10</field>
 
       <!-- Cuentas (referencias a los xmlids esperados en los CSV/XML de cuentas) -->
-      <field name="property_account_receivable_id" ref="l10n_evo_130000"/>
-      <field name="property_account_payable_id" ref="l10n_evo_210000"/>
-      <field name="property_account_income_categ_id" ref="l10n_evo_511000"/>
-      <field name="property_account_expense_categ_id" ref="l10n_evo_601000"/>
+      <field name="property_account_receivable_id" ref="l10n__ve_evo_130000"/>
+      <field name="property_account_payable_id" ref="l10n__ve_evo_210000"/>
+      <field name="property_account_income_categ_id" ref="l10n__ve_evo_511000"/>
+      <field name="property_account_expense_categ_id" ref="l10n__ve_evo_601000"/>
 
       <!-- Cuentas relacionadas con inventario y stock -->
-      <field name="property_stock_valuation_account_id" ref="l10n_evo_140000"/>
-      <field name="property_stock_account_input_categ_id" ref="l10n_evo_151100"/>
-      <field name="property_stock_account_output_categ_id" ref="l10n_evo_159000"/>
+      <field name="property_stock_valuation_account_id" ref="l10n__ve_evo_140000"/>
+      <field name="property_stock_account_input_categ_id" ref="l10n__ve_evo_151100"/>
+      <field name="property_stock_account_output_categ_id" ref="l10n__ve_evo_159000"/>
 
       <!-- Cuentas de impuestos y anticipos -->
-      <field name="property_tax_payable_account_id" ref="l10n_evo_214000"/>
-      <field name="property_tax_receivable_account_id" ref="l10n_evo_215000"/>
-      <field name="property_account_advance_receivable_id" ref="l10n_evo_114000"/>
-      <field name="property_account_advance_payable_id" ref="l10n_evo_270000"/>
+      <field name="property_tax_payable_account_id" ref="l10n__ve_evo_214000"/>
+      <field name="property_tax_receivable_account_id" ref="l10n__ve_evo_215000"/>
+      <field name="property_account_advance_receivable_id" ref="l10n__ve_evo_114000"/>
+      <field name="property_account_advance_payable_id" ref="l10n__ve_evo_270000"/>
 
       <!-- Cuentas para diferencias de caja -->
-      <field name="default_cash_difference_expense_account_id" ref="l10n_evo_720000"/>
-      <field name="default_cash_difference_income_account_id" ref="l10n_evo_710000"/>
+      <field name="default_cash_difference_expense_account_id" ref="l10n__ve_evo_720000"/>
+      <field name="default_cash_difference_income_account_id" ref="l10n__ve_evo_710000"/>
 
       <!-- Journals (se esperan xmlids o el hook los creará/registrará) -->
-      <field name="property_stock_journal" ref="l10n_evo_stock_journal"/>
-      <field name="property_stock_valuation_journal_id" ref="l10n_evo_stock_valuation_journal"/>
+      <field name="property_stock_journal" ref="l10n__ve_evo_stock_journal"/>
+      <field name="property_stock_valuation_journal_id" ref="l10n__ve_evo_stock_valuation_journal"/>
 
       <!-- Notas: el hook _post_init_assign_template intentará resolver/crear registros
            y escribir los campos que existan en esta plantilla. -->

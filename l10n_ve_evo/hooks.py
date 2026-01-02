@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# l10n_evo hooks.py (versión ajustada para Odoo 19)
+# l10n__ve_evo hooks.py (versión ajustada para Odoo 19)
 # Cambios principales:
 # - Importa api y usa la firma correcta para post_init_hook (cr, registry)
 # - _post_init_assign_template ahora recibe env y crea/registro el account.chart.template con ir.model.data
@@ -13,7 +13,7 @@ import re
 _logger = logging.getLogger(__name__)
 
 
-def _resolve_xmlid(env, xmlid_or_name, module='l10n_evo'):
+def _resolve_xmlid(env, xmlid_or_name, module='l10n__ve_evo'):
     if not xmlid_or_name:
         return None
     if '.' in xmlid_or_name:
@@ -31,7 +31,7 @@ def _resolve_xmlid(env, xmlid_or_name, module='l10n_evo'):
     return None
 
 
-def _ensure_journal_by_xmlname(env, xmlname, module='l10n_evo', name=None, code=None):
+def _ensure_journal_by_xmlname(env, xmlname, module='l10n__ve_evo', name=None, code=None):
     Journal = env['account.journal'].sudo()
     rec = _resolve_xmlid(env, xmlname, module=module)
     if rec:
@@ -46,7 +46,7 @@ def _ensure_journal_by_xmlname(env, xmlname, module='l10n_evo', name=None, code=
         imd = env['ir.model.data'].sudo().search([('module', '=', module), ('name', '=', xmlname), ('model', '=', 'account.journal')], limit=1)
         if not imd:
             env['ir.model.data'].sudo().create({'module': module, 'name': xmlname, 'model': 'account.journal', 'res_id': journal.id})
-            _logger.info("[l10n_evo] Registrado ir.model.data para journal existente %s -> %s", xmlname, journal.id)
+            _logger.info("[l10n__ve_evo] Registrado ir.model.data para journal existente %s -> %s", xmlname, journal.id)
         return journal
     vals = {'name': name or xmlname.replace('_', ' ').title(), 'code': code or (xmlname[:6].upper()), 'type': 'general'}
     if 'company_id' in Journal._fields:
@@ -57,10 +57,10 @@ def _ensure_journal_by_xmlname(env, xmlname, module='l10n_evo', name=None, code=
     try:
         j = Journal.create(vals)
         env['ir.model.data'].sudo().create({'module': module, 'name': xmlname, 'model': 'account.journal', 'res_id': j.id})
-        _logger.info("[l10n_evo] Creado y registrado journal %s -> %s", xmlname, j.id)
+        _logger.info("[l10n__ve_evo] Creado y registrado journal %s -> %s", xmlname, j.id)
         return j
     except Exception:
-        _logger.exception("[l10n_evo] No se pudo crear journal %s", xmlname)
+        _logger.exception("[l10n__ve_evo] No se pudo crear journal %s", xmlname)
         return None
 
 
@@ -78,7 +78,7 @@ def _find_account_type_record(env, account_type_code):
     return AccountType.search([], limit=1) or None
 
 
-def _ensure_account_by_xmlname(env, xmlname, module='l10n_evo'):
+def _ensure_account_by_xmlname(env, xmlname, module='l10n__ve_evo'):
     Account = env['account.account'].sudo()
     rec = _resolve_xmlid(env, xmlname, module=module)
     if rec:
@@ -91,7 +91,7 @@ def _ensure_account_by_xmlname(env, xmlname, module='l10n_evo'):
         imd = env['ir.model.data'].sudo().search([('module', '=', module), ('name', '=', xmlname), ('model', '=', 'account.account')], limit=1)
         if not imd:
             env['ir.model.data'].sudo().create({'module': module, 'name': xmlname, 'model': 'account.account', 'res_id': acc.id})
-            _logger.info("[l10n_evo] Registrado ir.model.data para cuenta existente %s -> %s", xmlname, acc.id)
+            _logger.info("[l10n__ve_evo] Registrado ir.model.data para cuenta existente %s -> %s", xmlname, acc.id)
         return acc
 
     account_type_key = None
@@ -127,10 +127,10 @@ def _ensure_account_by_xmlname(env, xmlname, module='l10n_evo'):
     try:
         a = Account.create(vals)
         env['ir.model.data'].sudo().create({'module': module, 'name': xmlname, 'model': 'account.account', 'res_id': a.id})
-        _logger.info("[l10n_evo] Creada y registrada cuenta %s -> %s", xmlname, a.id)
+        _logger.info("[l10n__ve_evo] Creada y registrada cuenta %s -> %s", xmlname, a.id)
         return a
     except Exception:
-        _logger.exception("[l10n_evo] No se pudo crear cuenta %s", xmlname)
+        _logger.exception("[l10n__ve_evo] No se pudo crear cuenta %s", xmlname)
         return None
 
 
@@ -149,12 +149,12 @@ def _assign_template_to_company(env, tpl):
                 current_id = current.id if hasattr(current, 'id') else current
                 if not current_id or current_id != tpl.id:
                     company.write({fld: tpl.id})
-                    _logger.info("[l10n_evo] Template %s asignado a res.company.%s", tpl.id, fld)
+                    _logger.info("[l10n__ve_evo] Template %s asignado a res.company.%s", tpl.id, fld)
                 return True
             except Exception:
-                _logger.exception("[l10n_evo] Error asignando template a res.company.%s", fld)
+                _logger.exception("[l10n__ve_evo] Error asignando template a res.company.%s", fld)
                 return False
-    _logger.info("[l10n_evo] Ningún campo estándar para asignar template encontrado en res.company.")
+    _logger.info("[l10n__ve_evo] Ningún campo estándar para asignar template encontrado en res.company.")
     return False
 
 
@@ -164,13 +164,13 @@ def _post_init_assign_template(env):
 
     # Si el modelo es abstracto (_auto == False) no hay tabla para crear registros
     if not getattr(Model, '_auto', True):
-        _logger.info("l10n_evo: account.chart.template is abstract in this DB; skipping template creation.")
+        _logger.info("l10n__ve_evo: account.chart.template is abstract in this DB; skipping template creation.")
         return None
 
-    name = "Venezuela - EVO (l10n_evo)"
+    name = "Venezuela - EVO (l10n__ve_evo)"
     existing = Model.search([('name', '=', name)], limit=1)
     if existing:
-        _logger.info("l10n_evo: Chart template '%s' already exists (id=%s). Skipping creation.", name, existing.id)
+        _logger.info("l10n__ve_evo: Chart template '%s' already exists (id=%s). Skipping creation.", name, existing.id)
         return existing
 
     country = env.ref('base.ve', raise_if_not_found=False)
@@ -189,30 +189,30 @@ def _post_init_assign_template(env):
         # Registrar ir.model.data para que aparezca como paquete fiscal seleccionable
         try:
             env['ir.model.data'].sudo().create({
-                'module': 'l10n_evo',
+                'module': 'l10n__ve_evo',
                 'name': 'chart_template_ve_evo',
                 'model': 'account.chart.template',
                 'res_id': tpl.id,
             })
-            _logger.info("l10n_evo: Registered ir.model.data for chart template id=%s", tpl.id)
+            _logger.info("l10n__ve_evo: Registered ir.model.data for chart template id=%s", tpl.id)
         except Exception:
-            _logger.exception("l10n_evo: Failed to create ir.model.data for chart template id=%s", tpl.id)
-        _logger.info("l10n_evo: Created chart template '%s' (id=%s).", name, tpl.id)
+            _logger.exception("l10n__ve_evo: Failed to create ir.model.data for chart template id=%s", tpl.id)
+        _logger.info("l10n__ve_evo: Created chart template '%s' (id=%s).", name, tpl.id)
         # Intentar asignar inmediatamente a la compañía actual
         try:
             _assign_template_to_company(env, tpl)
         except Exception:
-            _logger.exception("[l10n_evo] Error asignando template a la compañía tras creación")
+            _logger.exception("[l10n__ve_evo] Error asignando template a la compañía tras creación")
         return tpl
     except Exception as e:
-        _logger.exception("l10n_evo: Failed to create chart template: %s", e)
+        _logger.exception("l10n__ve_evo: Failed to create chart template: %s", e)
         return None
 
 
 def _post_init_hook(cr, registry):
     """Hook de post instalación invocado por Odoo: firma (cr, registry)."""
     env = api.Environment(cr, SUPERUSER_ID, {})
-    module = 'l10n_evo'
+    module = 'l10n__ve_evo'
     try:
         # 1) Asignar country_id a tax groups creados por este módulo
         try:
@@ -231,16 +231,16 @@ def _post_init_hook(cr, registry):
                             continue
                     if tg_ids:
                         env['account.tax.group'].browse(tg_ids).write({'country_id': ve.id})
-                        _logger.info("[l10n_evo] Asignado country_id VE a %s tax groups creados por el módulo.", len(tg_ids))
+                        _logger.info("[l10n__ve_evo] Asignado country_id VE a %s tax groups creados por el módulo.", len(tg_ids))
         except Exception:
-            _logger.exception("[l10n_evo] Error asignando country_id a tax groups")
+            _logger.exception("[l10n__ve_evo] Error asignando country_id a tax groups")
 
         # 2) Ajustar simetría de impuestos (refund repartition) de forma segura
         try:
             tax_xmlids = [
-                'l10n_evo.l10n_evo_iva_sale_16',
-                'l10n_evo.l10n_evo_iva_sale_8',
-                'l10n_evo.l10n_evo_iva_sale_exento'
+                'l10n__ve_evo.l10n__ve_evo_iva_sale_16',
+                'l10n__ve_evo.l10n__ve_evo_iva_sale_8',
+                'l10n__ve_evo.l10n__ve_evo_iva_sale_exento'
             ]
             for xmlid in tax_xmlids:
                 tax = env.ref(xmlid, raise_if_not_found=False)
@@ -255,30 +255,30 @@ def _post_init_hook(cr, registry):
                                     r.write({'factor_percent': abs(invoice_lines[0].factor_percent)})
                                 else:
                                     r.write({'factor_percent': 100})
-                            _logger.info("[l10n_evo] Ajustado refund factor para impuesto %s.", tax.name)
+                            _logger.info("[l10n__ve_evo] Ajustado refund factor para impuesto %s.", tax.name)
                         except Exception:
-                            _logger.exception("[l10n_evo] No se pudo ajustar refund factor para impuesto %s", tax.name)
+                            _logger.exception("[l10n__ve_evo] No se pudo ajustar refund factor para impuesto %s", tax.name)
         except Exception:
-            _logger.exception("[l10n_evo] Error ajustando simetría de impuestos")
+            _logger.exception("[l10n__ve_evo] Error ajustando simetría de impuestos")
 
         # 3) Crear/registrar chart template y asignarlo a la compañía
         try:
             _post_init_assign_template(env)
         except Exception:
-            _logger.exception("[l10n_evo] Error en asignación de template")
+            _logger.exception("[l10n__ve_evo] Error en asignación de template")
     except Exception:
-        _logger.exception("[l10n_evo] Error en _post_init_hook")
+        _logger.exception("[l10n__ve_evo] Error en _post_init_hook")
 
 
 def uninstall_hook(env):
-    module = 'l10n_evo'
+    module = 'l10n__ve_evo'
     try:
         # 1) Restaurar refund factors de impuestos del módulo a 100 (si existen)
         try:
             tax_xmlids = [
-                'l10n_evo.l10n_evo_iva_sale_16',
-                'l10n_evo.l10n_evo_iva_sale_8',
-                'l10n_evo.l10n_evo_iva_sale_exento'
+                'l10n__ve_evo.l10n__ve_evo_iva_sale_16',
+                'l10n__ve_evo.l10n__ve_evo_iva_sale_8',
+                'l10n__ve_evo.l10n__ve_evo_iva_sale_exento'
             ]
             for xmlid in tax_xmlids:
                 tax = env.ref(xmlid, raise_if_not_found=False)
@@ -287,11 +287,11 @@ def uninstall_hook(env):
                     if refund_lines:
                         try:
                             refund_lines.write({'factor_percent': 100})
-                            _logger.info("[l10n_evo] Restaurado refund factor para impuesto %s.", tax.name)
+                            _logger.info("[l10n__ve_evo] Restaurado refund factor para impuesto %s.", tax.name)
                         except Exception:
-                            _logger.exception("[l10n_evo] No se pudo restaurar refund factor para impuesto %s", tax.name)
+                            _logger.exception("[l10n__ve_evo] No se pudo restaurar refund factor para impuesto %s", tax.name)
         except Exception:
-            _logger.exception("[l10n_evo] Error restaurando refund factors")
+            _logger.exception("[l10n__ve_evo] Error restaurando refund factors")
 
         # 2) Restaurar country_id en tax groups creados por el módulo
         try:
@@ -308,9 +308,9 @@ def uninstall_hook(env):
                         continue
                 if tg_ids:
                     env['account.tax.group'].browse(tg_ids).write({'country_id': False})
-                    _logger.info("[l10n_evo] Restaurado country_id en %s tax groups creados por el módulo.", len(tg_ids))
+                    _logger.info("[l10n__ve_evo] Restaurado country_id en %s tax groups creados por el módulo.", len(tg_ids))
         except Exception:
-            _logger.exception("[l10n_evo] Error restaurando country_id en tax groups")
+            _logger.exception("[l10n__ve_evo] Error restaurando country_id en tax groups")
 
         # 3) Intentar eliminar accounts/journals creados por el módulo si están sin uso
         try:
@@ -326,16 +326,16 @@ def uninstall_hook(env):
                         try:
                             j.unlink()
                         except Exception:
-                            _logger.exception("[l10n_evo] No se pudo eliminar journal %s (%s)", j.name, j.id)
+                            _logger.exception("[l10n__ve_evo] No se pudo eliminar journal %s (%s)", j.name, j.id)
                         try:
                             imd.unlink()
                         except Exception:
-                            _logger.exception("[l10n_evo] No se pudo eliminar ir.model.data para journal %s", imd.name)
-                        _logger.info("[l10n_evo] Eliminado journal %s (%s)", j.name, j.id)
+                            _logger.exception("[l10n__ve_evo] No se pudo eliminar ir.model.data para journal %s", imd.name)
+                        _logger.info("[l10n__ve_evo] Eliminado journal %s (%s)", j.name, j.id)
                     else:
-                        _logger.info("[l10n_evo] No se elimina journal %s: tiene movimientos", j.name)
+                        _logger.info("[l10n__ve_evo] No se elimina journal %s: tiene movimientos", j.name)
                 except Exception:
-                    _logger.exception("[l10n_evo] Error procesando journal imd %s", imd.name)
+                    _logger.exception("[l10n__ve_evo] Error procesando journal imd %s", imd.name)
             for imd in IMD.search([('module', '=', module), ('model', '=', 'account.account')]):
                 try:
                     a = env['account.account'].browse(imd.res_id)
@@ -347,18 +347,18 @@ def uninstall_hook(env):
                         try:
                             a.unlink()
                         except Exception:
-                            _logger.exception("[l10n_evo] No se pudo eliminar cuenta %s (%s)", a.code, a.id)
+                            _logger.exception("[l10n__ve_evo] No se pudo eliminar cuenta %s (%s)", a.code, a.id)
                         try:
                             imd.unlink()
                         except Exception:
-                            _logger.exception("[l10n_evo] No se pudo eliminar ir.model.data para cuenta %s", imd.name)
-                        _logger.info("[l10n_evo] Eliminada cuenta %s (%s)", a.code, a.id)
+                            _logger.exception("[l10n__ve_evo] No se pudo eliminar ir.model.data para cuenta %s", imd.name)
+                        _logger.info("[l10n__ve_evo] Eliminada cuenta %s (%s)", a.code, a.id)
                     else:
-                        _logger.info("[l10n_evo] No se elimina cuenta %s: tiene movimientos", a.code)
+                        _logger.info("[l10n__ve_evo] No se elimina cuenta %s: tiene movimientos", a.code)
                 except Exception:
-                    _logger.exception("[l10n_evo] Error procesando account imd %s", imd.name)
+                    _logger.exception("[l10n__ve_evo] Error procesando account imd %s", imd.name)
         except Exception:
-            _logger.exception("[l10n_evo] Error limpiando accounts/journals en uninstall")
+            _logger.exception("[l10n__ve_evo] Error limpiando accounts/journals en uninstall")
 
     except Exception:
-        _logger.exception("[l10n_evo] Error en uninstall_hook")
+        _logger.exception("[l10n__ve_evo] Error en uninstall_hook")
