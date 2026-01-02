@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <data noupdate="1">
+  <data noupdate="0">
 
     <!-- ACTIVOS -->
     <record id="l10n_ve_evo_110000" model="account.account">
@@ -163,6 +163,13 @@
     </record>
 
     <!-- OTROS INGRESOS Y GASTOS -->
+    <record id="l10n_ve_evo_700000" model="account.account">
+      <field name="name">Ingresos varios</field>
+      <field name="code">700000</field>
+      <field name="account_type">income_other</field>
+      <field name="reconcile">False</field>
+    </record>
+
     <record id="l10n_ve_evo_710000" model="account.account">
       <field name="name">Intereses Ganados</field>
       <field name="code">710000</field>
