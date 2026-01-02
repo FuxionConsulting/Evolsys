@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 - l10n__ve_evo
+# Copyright 2024 - l10n_ve_evo
 {
     'name': 'Venezuela - Contabilidad (Evolsys)',
     'author': 'Evolsys',
-    'version': "19.0.0.0.3",
+    'version': "19.0.0.0.4",
     'category': 'Accounting/Localizations/Account Charts',
     'license': 'LGPL-3',
     'summary': 'Localización Contable para Venezuela (VE) para Odoo 19',
