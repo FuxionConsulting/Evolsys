@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Nueva vista tree completa para contactos VE -->
+    <record id="view_partner_tree_l10n_ve" model="ir.ui.view">
+        <field name="name">res.partner.tree.l10n.ve</field>
+        <field name="model">res.partner</field>
+        <!-- ✅ No inherit_id: es una vista completa -->
+        <field name="arch" type="xml">
+            <tree string="Contactos VE" create="true" edit="true">
+                <field name="name"/>
+                <field name="company_type"/>
+                <field name="rif_type"/>
+                <field name="vat"/>
+                <field name="city_id"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="active"/>
+            </tree>
+        </field>
+        <!-- ✅ Prioridad alta para que sea preferida -->
+        <field name="priority">50</field>
+    </record>
+
+</odoo>

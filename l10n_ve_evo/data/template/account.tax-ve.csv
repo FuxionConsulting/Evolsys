@@ -1,0 +1,17 @@
+id,sequence,name,amount,amount_type,type_tax_use,tax_group_id,country_id,active,children_tax_ids,repartition_line_ids/repartition_type,repartition_line_ids/document_type,repartition_line_ids/account_id,repartition_line_ids/factor_percent,repartition_line_ids/use_in_tax_closing
+iva_sale_16,0,"IVA- Venta 16%",16.0,percent,sale,IVA 16% (General),Venezuela,True,,base,invoice,,0,
+,,,,,,,,,,tax,invoice,"IVA por Pagar (Ventas)",100,True
+,,,,,,,,,,base,refund,,0,
+,,,,,,,,,,tax,refund,"IVA por Pagar (Ventas)",100,True
+iva_purchase_16,1,IVA- Compra 16%,16.0,percent,purchase,IVA 16% (General),Venezuela,True,,base,invoice,,0,
+,,,,,,,,,,tax,invoice,"IVA Crédito Fiscal (Compras)",100,True
+,,,,,,,,,,base,refund,,0,
+,,,,,,,,,,tax,refund,"IVA Crédito Fiscal (Compras)",100,True
+iva_sale_8,2,IVA- Venta 8%,8.0,percent,sale,IVA 8% (Reducido),Venezuela,True,,base,invoice,,0,
+,,,,,,,,,,tax,invoice,"IVA por Pagar (Ventas)",100,True
+,,,,,,,,,,base,refund,,0,
+,,,,,,,,,,tax,refund,"IVA por Pagar (Ventas)",100,True
+iva_sale_exento,3,Exento- (Venta),0.0,percent,sale,Exento 0%,Venezuela,True,,base,invoice,,0,
+,,,,,,,,,,tax,invoice,"IVA por Pagar (Ventas)",100,True
+,,,,,,,,,,base,refund,,0,
+,,,,,,,,,,tax,refund,"IVA por Pagar (Ventas)",100,

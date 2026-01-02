@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_partner_kanban_l10n_ve" model="ir.ui.view">
+        <field name="name">res.partner.kanban.l10n.ve</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+
+        <field name="arch" type="xml">
+
+            <!-- Solo aseguramos que rif_type esté disponible en el kanban -->
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+
+            <!-- En Odoo 19, la plantilla OWL suele iterar record.*,
+                 así que con que el campo exista en el modelo, ya se puede usar en el template,
+                 sin tocar aquí el HTML interno. -->
+
+        </field>
+    </record>
+
+</odoo>
