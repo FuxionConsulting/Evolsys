@@ -78,12 +78,4 @@ def _uninstall_cleanup(env):
         MODULE
     )
 
-def _post_init_hook(cr, registry):
-    """Hook que Odoo llama tras instalar el módulo."""
-    env = api.Environment(cr, SUPERUSER_ID, {})
-    _post_init_install(env)
 
-def uninstall_hook(cr, registry):
-    """Hook que Odoo llama al desinstalar el módulo."""
-    env = api.Environment(cr, SUPERUSER_ID, {})
-    _uninstall_cleanup(env)
