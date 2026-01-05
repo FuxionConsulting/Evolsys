@@ -1,2 +1,2 @@
 from . import models
-#from .hooks import _post_init_hook, uninstall_hook
+from .models import company_init

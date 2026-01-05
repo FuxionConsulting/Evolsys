@@ -1,20 +1,11 @@
 <odoo>
   <data noupdate="0">
-
-    <!-- Partner explícito con vat -->
     <record id="partner_motofit" model="res.partner">
       <field name="name">MOTOFIT PRO, C.A</field>
       <field name="is_company">True</field>
-      <field name="vat">J507849082</field> <!-- pon el RIF real -->
+      <field name="vat">J507849082</field>
       <field name="company_type">company</field>
     </record>
-
-    <!-- Company que usa el partner creado -->
-    <record id="company_motofit" model="res.company">
-      <field name="name">MOTOFIT PRO, C.A</field>
-      <field name="partner_id" ref="l10n_ve_evo.partner_motofit"/>
-      <!-- otros campos opcionales -->
-    </record>
-
+    <!-- NO crear aquí res.company si usas el hook -->
   </data>
 </odoo>

@@ -37,7 +37,7 @@
     ],
  
 
-   
+    'post_init_hook': 'create_company_if_missing',
     'auto_install': False,
     'installable': True,
     'images': ['static/description/icon.png'],
