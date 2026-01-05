@@ -6,7 +6,7 @@
     'author': 'Evolsys',
     "summary": "Localización Contable para Venezuela",
     'category': 'Accounting/Localizations/Account Charts',
-    "version": "19.0.2.4.1",
+    "version": "19.0.2.4.2",
     'summary': 'Localización Contable para Venezuela (VE) para Odoo 19',
     'depends': [
         
@@ -25,6 +25,7 @@
         'data/res.country.parish.csv',
         'data/res.city.csv',
         'data/account.group-ve.xml',
+        'data/companies.xml',
         'data/account.account-ve.xml',        
         'data/account.tax.group.xml',
         'data/account.tax.xml',
