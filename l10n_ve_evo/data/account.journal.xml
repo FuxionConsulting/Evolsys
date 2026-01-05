@@ -8,7 +8,7 @@
       <field name="code">STK-EVO</field>
       <field name="type">general</field>
       <!-- company_id se asigna solo si el campo existe en la instalación -->
-      <!-- <field name="company_ids" eval="[(6, 0, [ref('l10n_ve_evo.company_motofit')])]"/> -->
+      <!-- <field name="company_ids" eval="[(6, 0, [ref('base.main_company')])]"/> -->
     </record>
 
     <!-- Stock Valuation Journal (valoración de inventario) -->
@@ -16,7 +16,7 @@
       <field name="name">Stock Valuation Journal EVO</field>
       <field name="code">VAL-EVO</field>
       <field name="type">general</field>
-      <!-- <field name="company_ids" eval="[(6, 0, [ref('l10n_ve_evo.company_motofit')])]"/> -->
+      <!-- <field name="company_ids" eval="[(6, 0, [ref('base.main_company')])]"/> -->
     </record>
 
   </data>
