@@ -8,7 +8,7 @@
       <field name="code">110000</field>
       <field name="account_type">asset_current</field>
       <field name="reconcile">True</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
     <record id="l10n_ve_evo_111000" model="account.account">
@@ -16,7 +16,7 @@
       <field name="code">111000</field>
       <field name="account_type">asset_current</field>
       <field name="reconcile">True</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
     <record id="l10n_ve_evo_114000" model="account.account">
@@ -24,7 +24,7 @@
       <field name="code">114000</field>
       <field name="account_type">asset_current</field>
       <field name="reconcile">True</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
     <record id="l10n_ve_evo_115000" model="account.account">
@@ -32,7 +32,7 @@
       <field name="code">115000</field>
       <field name="account_type">asset_prepayments</field>
       <field name="reconcile">False</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
     <record id="l10n_ve_evo_130000" model="account.account">
@@ -40,7 +40,7 @@
       <field name="code">130000</field>
       <field name="account_type">asset_receivable</field>
       <field name="reconcile">True</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
     <record id="l10n_ve_evo_140000" model="account.account">
@@ -48,7 +48,7 @@
       <field name="code">140000</field>
       <field name="account_type">asset_current</field>
       <field name="reconcile">False</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
     <record id="l10n_ve_evo_151100" model="account.account">
@@ -56,7 +56,7 @@
       <field name="code">151100</field>
       <field name="account_type">asset_fixed</field>
       <field name="reconcile">False</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
     <record id="l10n_ve_evo_159000" model="account.account">
@@ -64,7 +64,7 @@
       <field name="code">159000</field>
       <field name="account_type">asset_non_current</field>
       <field name="reconcile">False</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
     <!-- PASIVOS -->
@@ -73,7 +73,7 @@
       <field name="code">210000</field>
       <field name="account_type">liability_payable</field>
       <field name="reconcile">True</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
     <record id="l10n_ve_evo_214000" model="account.account">
@@ -81,7 +81,7 @@
       <field name="code">214000</field>
       <field name="account_type">liability_current</field>
       <field name="reconcile">False</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
     <record id="l10n_ve_evo_215000" model="account.account">
@@ -89,7 +89,7 @@
       <field name="code">215000</field>
       <field name="account_type">liability_current</field>
       <field name="reconcile">False</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
     <record id="l10n_ve_evo_270000" model="account.account">
@@ -97,7 +97,7 @@
       <field name="code">270000</field>
       <field name="account_type">liability_current</field>
       <field name="reconcile">True</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
     <record id="l10n_ve_evo_290000" model="account.account">
@@ -105,7 +105,7 @@
       <field name="code">290000</field>
       <field name="account_type">liability_current</field>
       <field name="reconcile">False</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
     <!-- PATRIMONIO -->
@@ -114,7 +114,7 @@
       <field name="code">310000</field>
       <field name="account_type">equity</field>
       <field name="reconcile">False</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
     <record id="l10n_ve_evo_390000" model="account.account">
@@ -122,7 +122,7 @@
       <field name="code">390000</field>
       <field name="account_type">equity</field>
       <field name="reconcile">False</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
     <!-- INGRESOS -->
@@ -131,7 +131,7 @@
       <field name="code">410000</field>
       <field name="account_type">income</field>
       <field name="reconcile">False</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
     <record id="l10n_ve_evo_420000" model="account.account">
@@ -139,7 +139,7 @@
       <field name="code">420000</field>
       <field name="account_type">income</field>
       <field name="reconcile">False</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
     <record id="l10n_ve_evo_490000" model="account.account">
@@ -147,7 +147,7 @@
       <field name="code">490000</field>
       <field name="account_type">income_other</field>
       <field name="reconcile">False</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
     <!-- COSTOS -->
@@ -156,7 +156,7 @@
       <field name="code">511000</field>
       <field name="account_type">expense_direct_cost</field>
       <field name="reconcile">False</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
     <!-- GASTOS -->
@@ -165,7 +165,7 @@
       <field name="code">601000</field>
       <field name="account_type">expense</field>
       <field name="reconcile">False</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
     <record id="l10n_ve_evo_611100" model="account.account">
@@ -173,7 +173,7 @@
       <field name="code">611100</field>
       <field name="account_type">expense</field>
       <field name="reconcile">False</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
     <record id="l10n_ve_evo_621000" model="account.account">
@@ -181,7 +181,7 @@
       <field name="code">621000</field>
       <field name="account_type">expense_depreciation</field>
       <field name="reconcile">False</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
     <!-- OTROS INGRESOS Y GASTOS -->
@@ -190,7 +190,7 @@
       <field name="code">700000</field>
       <field name="account_type">income_other</field>
       <field name="reconcile">False</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
     <record id="l10n_ve_evo_710000" model="account.account">
@@ -198,7 +198,7 @@
       <field name="code">710000</field>
       <field name="account_type">income_other</field>
       <field name="reconcile">False</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
     <record id="l10n_ve_evo_720000" model="account.account">
@@ -206,7 +206,7 @@
       <field name="code">720000</field>
       <field name="account_type">expense_other</field>
       <field name="reconcile">False</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
     <record id="l10n_ve_evo_730000" model="account.account">
@@ -214,7 +214,7 @@
       <field name="code">730000</field>
       <field name="account_type">income_other</field>
       <field name="reconcile">False</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
     <record id="l10n_ve_evo_740000" model="account.account">
@@ -222,7 +222,7 @@
       <field name="code">740000</field>
       <field name="account_type">expense_other</field>
       <field name="reconcile">False</field>
-      <field name="company_id" ref="MOTOFIT PRO, C.A"/>
+      <field name="company_id" ref="l10n_ve_evo.motofit_pro,_c.a"/>
     </record>
 
   </data>
