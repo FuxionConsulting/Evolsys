@@ -13,8 +13,8 @@
     <record id="company_motofit" model="res.company">
       <field name="name">MOTOFIT PRO, C.A</field>
       <field name="partner_id" ref="l10n_ve_evo.partner_motofit"/>-->
-      <!-- otros campos opcionales -->
-    </record>
+      <!-- otros campos opcionales 
+    </record>-->
 
   </data>
 </odoo>
