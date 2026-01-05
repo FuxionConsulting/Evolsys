@@ -65,18 +65,46 @@ class ResPartner(models.Model):
     # NORMALIZACIÓN BACKEND
     # ---------------------------------------------------------
     def _normalize_vat(self, vals):
+        """
+        Normaliza el campo 'vat'.
+        - Si vals es una lista: devuelve una lista normalizada.
+        - Si vals es un dict: normaliza y devuelve el dict.
+        - Si vals no es dict ni list: lo devuelve sin cambios.
+        """
+        if isinstance(vals, list):
+            normalized_list = []
+            for v in vals:
+                # Asegurarse de que cada elemento sea dict antes de normalizar
+                if isinstance(v, dict):
+                    vat = v.get('vat')
+                    if vat:
+                        v['vat'] = re.sub(r'[^a-zA-Z0-9]', '', vat).upper()
+                normalized_list.append(v)
+            return normalized_list
+
+        if not isinstance(vals, dict):
+            return vals
+
         vat = vals.get('vat')
         if vat:
             vals['vat'] = re.sub(r'[^a-zA-Z0-9]', '', vat).upper()
         return vals
 
     def write(self, vals):
+        """
+        write normalmente recibe un dict; por seguridad, soportamos también listas.
+        """
         vals = self._normalize_vat(vals)
         return super(ResPartner, self).write(vals)
 
-    def create(self, vals):
-        vals = self._normalize_vat(vals)
-        return super(ResPartner, self).create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        """
+        create puede recibir una lista de dicts; normalizamos cada dict usando
+        _normalize_vat (que acepta listas) y delegamos al super.
+        """
+        vals_list = self._normalize_vat(vals_list)
+        return super(ResPartner, self).create(vals_list)
 
     # ---------------------------------------------------------
     # VALIDACIONES
