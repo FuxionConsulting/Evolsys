@@ -9,12 +9,12 @@
       <field name="company_type">company</field>
     </record>
 
-    <!-- Company que usa el partner creado 
+    <!-- Company que usa el partner creado -->
     <record id="company_motofit" model="res.company">
       <field name="name">MOTOFIT PRO, C.A</field>
-      <field name="partner_id" ref="l10n_ve_evo.partner_motofit"/>-->
-      <!-- otros campos opcionales 
-    </record>-->
+      <field name="partner_id" ref="l10n_ve_evo.partner_motofit"/>
+      <!-- otros campos opcionales -->
+    </record>
 
   </data>
 </odoo>
