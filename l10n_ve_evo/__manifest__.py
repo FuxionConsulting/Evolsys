@@ -11,7 +11,6 @@
         'account',
         'accountant',
         'account_accountant',
-        'account_no_followup',
         'rate_evo',
     ],
     'data': [
