@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
 from odoo import api, SUPERUSER_ID
 import logging
+_logger = logging.getLogger(__name__)
 
 _logger = logging.getLogger(__name__)
 
