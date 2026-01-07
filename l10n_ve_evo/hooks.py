@@ -31,6 +31,7 @@ XML_IDS_TO_CHECK = [
 ]
 
 def _ensure_records_exist(env):
+    """Verifica que los xml ids listados existan en la base y registra advertencias si faltan."""
     missing = []
     for xml_id in XML_IDS_TO_CHECK:
         full_xmlid = f'{MODULE}.{xml_id}'
@@ -47,16 +48,17 @@ def _ensure_records_exist(env):
         _logger.info("Todos los xml ids esperados para %s están presentes.", MODULE)
 
 # -------------------------
-# Hook principal
+# Hook principal (firma nueva)
 # -------------------------
-def create_company_if_missing(cr, registry):
-    env = api.Environment(cr, SUPERUSER_ID, {})
+def create_company_if_missing(env):
+    """Hook post-init para crear/verificar compañía, XML IDs e impuestos."""
+    env = env.sudo()
     _logger.info("Iniciando post-init hook para %s", MODULE)
 
     # 1) Verificar/crear compañía
-    Company = env['res.company'].sudo()
-    Partner = env['res.partner'].sudo()
-    Imd = env['ir.model.data'].sudo()
+    Company = env['res.company']
+    Partner = env['res.partner']
+    Imd = env['ir.model.data']
 
     company = Company.search([('name', '=', COMPANY_NAME)], limit=1)
     if not company:
