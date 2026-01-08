@@ -11,10 +11,21 @@ COMPANY_NAME = 'MOTOFIT PRO, C.A'
 COMPANY_VAT = 'J507849082'
 EXTERNAL_ID_NAME = 'company_main'
 
+# Lista de archivos que deben cargarse manualmente después de crear la compañía
+# para evitar errores de validación y asegurar la vinculación correcta.
+DATA_FILES = [
+    'data/account.group-ve.xml',
+    'data/account.tax.group.xml',
+    'data/account.journal.xml',
+    'data/account.fiscal.position.xml',
+    'data/account_account_data.xml',
+]
+
 def create_company_if_missing(env):
     """
     Hook post-init para la localización de Venezuela:
-    Carga el plan de cuentas manualmente tras asegurar la existencia de la compañía.
+    1. Asegura la existencia de la compañía y su ID externo.
+    2. Carga manualmente todos los XMLs contables.
     """
     env = env(user=SUPERUSER_ID)
     _logger.info("Iniciando post-init hook para %s", MODULE)
@@ -40,7 +51,7 @@ def create_company_if_missing(env):
         })
         _logger.info("Compañía '%s' creada satisfactoriamente.", COMPANY_NAME)
     
-    # 2. Asegurar que el ID Externo 'company_main' existe para el XML de cuentas
+    # 2. Asegurar que el ID Externo 'company_main' existe para los XMLs
     exist_id = Imd.search([('module', '=', MODULE), ('name', '=', EXTERNAL_ID_NAME)], limit=1)
     if not exist_id:
         Imd.create({
@@ -52,11 +63,12 @@ def create_company_if_missing(env):
         })
         _logger.info("External ID '%s' vinculado a la compañía.", EXTERNAL_ID_NAME)
 
-    # 3. CARGA MANUAL DEL PLAN DE CUENTAS (account_account_data.xml)
-    # Esto evita el error de "accounts must be assigned to at least one company"
-    _load_chart_of_accounts(env)
+    # 3. CARGA MANUAL DE TODOS LOS DATOS CONTABLES
+    # Recorremos la lista de archivos definidos en DATA_FILES
+    for xml_file in DATA_FILES:
+        _load_data_file(env, xml_file)
 
-    # 4. Vincular registros cargados previamente que no tengan compañía
+    # 4. Vincular registros que pudieran haber quedado huérfanos
     _assign_orphans(env, company)
 
     # 5. Activar impuestos y posiciones
@@ -64,39 +76,38 @@ def create_company_if_missing(env):
 
     _logger.info("Proceso de post-instalación completado con éxito.")
 
-def _load_chart_of_accounts(env):
-    """Función para cargar el archivo XML de cuentas usando el importador de Odoo."""
+def _load_data_file(env, relative_path):
+    """Función genérica para cargar archivos XML del módulo."""
     try:
-        _logger.info("Importando plan de cuentas desde account_account_data.xml...")
+        _logger.info("Importando archivo: %s", relative_path)
         from odoo.modules.module import get_resource_path
         
-        # Obtenemos la ruta física del archivo
-        file_path = get_resource_path(MODULE, 'data', 'account_account_data.xml')
+        file_path = get_resource_path(MODULE, relative_path)
         
         if file_path and os.path.exists(file_path):
             with open(file_path, 'rb') as f:
-                # convert_xml_import procesa el archivo igual que si estuviera en el manifiesto
                 convert.convert_xml_import(env.cr, MODULE, f, idref={}, mode='init', noupdate=False)
-            _logger.info("Plan de cuentas cargado exitosamente.")
+            _logger.info("Archivo %s cargado exitosamente.", relative_path)
         else:
-            _logger.error("No se encontró el archivo en: data/account_account_data.xml")
+            _logger.error("No se encontró el archivo en: %s", relative_path)
     except Exception as e:
-        _logger.error("Error durante la carga manual del plan de cuentas: %s", e)
+        _logger.error("Error cargando %s: %s", relative_path, e)
 
 def _assign_orphans(env, company):
     """Vincula impuestos, diarios y posiciones que se cargaron sin compañía asignada."""
     models = [
         ('account.tax', 'Impuestos'),
         ('account.journal', 'Diarios'),
-        ('account.fiscal.position', 'Posiciones Fiscales')
+        ('account.fiscal.position', 'Posiciones Fiscales'),
+        ('account.group', 'Grupos de Cuentas'),
+        ('account.account', 'Cuentas')
     ]
     for model_name, label in models:
         try:
-            records = env[model_name].search([
-                ('company_id', '=', False)
-            ])
+            # Buscamos registros de este módulo sin compañía
+            domain = [('company_id', '=', False)]
+            records = env[model_name].search(domain)
             for rec in records:
-                # Verificar si el registro pertenece a este módulo
                 xml_id = rec.get_external_id().get(rec.id)
                 if xml_id and xml_id.startswith(MODULE):
                     rec.write({'company_id': company.id})
@@ -106,6 +117,9 @@ def _assign_orphans(env, company):
 
 def _force_activation(env, company):
     """Asegura que los impuestos y posiciones fiscales estén activos."""
-    env['account.tax'].search([('company_id', '=', company.id)]).write({'active': True})
-    env['account.fiscal.position'].search([('company_id', '=', company.id)]).write({'active': True})
-    _logger.info("Configuración contable activada.")
+    try:
+        env['account.tax'].search([('company_id', '=', company.id)]).write({'active': True})
+        env['account.fiscal.position'].search([('company_id', '=', company.id)]).write({'active': True})
+        _logger.info("Configuración contable activada.")
+    except Exception as e:
+        _logger.error("Error activando configuración: %s", e)
