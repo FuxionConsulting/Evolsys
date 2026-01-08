@@ -23,10 +23,9 @@
                 <!-- Campos geográficos específicos para Venezuela -->
                 <xpath expr="//field[@name='state_id']" position="after">
                     <!-- 
-                        SOLUCIÓN DEFINITIVA AL ParseError:
-                        Forzamos el dominio a solo state_id. 
-                        Añadimos 'force_save' y sobreescribimos cualquier dominio previo de base_address_extended
-                        que intente buscar 'country_id' en res.city.
+                        ELIMINACIÓN DEL ERROR DE DOMINIO:
+                        Usamos un XPath específico para 'city_id' si ya existe o lo definimos de cero.
+                        Forzamos el atributo 'domain' para que sea simple y no busque 'country_id'.
                     -->
                     <field name="city_id" 
                            placeholder="Ciudad" 
@@ -46,6 +45,14 @@
                            options="{'no_create': True}" 
                            domain="[('municipality_id', '=', municipality_id)]"
                            invisible="country_code != 'VE' or not municipality_id"/>
+                </xpath>
+
+                <!-- 
+                    Ajuste adicional por si el campo ya estaba en la vista padre con el dominio erróneo.
+                    Intentamos limpiar cualquier definición previa de city_id que cause el ParseError.
+                -->
+                <xpath expr="//field[@name='city_id']" position="attributes">
+                    <attribute name="domain">[('state_id', '=', state_id)]</attribute>
                 </xpath>
 
             </field>
