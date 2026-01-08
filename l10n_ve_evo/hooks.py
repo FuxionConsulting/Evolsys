@@ -8,65 +8,38 @@ COMPANY_NAME = 'MOTOFIT PRO, C.A'
 COMPANY_VAT = 'J507849082'
 EXTERNAL_ID_NAME = 'company_main'
 
-# -------------------------
-# Verificación de XML IDs
-# -------------------------
-XML_IDS_TO_CHECK = [
-    'l10n_ve_evo_group_1', 'l10n_ve_evo_group_10', 'l10n_ve_evo_group_11',
-    'l10n_ve_evo_110000', 'l10n_ve_evo_111000', 'l10n_ve_evo_114000',
-    'l10n_ve_evo_115000', 'l10n_ve_evo_130000', 'l10n_ve_evo_140000',
-    'l10n_ve_evo_151100', 'l10n_ve_evo_159000', 'l10n_ve_evo_210000',
-    'l10n_ve_evo_214000', 'l10n_ve_evo_215000', 'l10n_ve_evo_270000',
-    'l10n_ve_evo_290000', 'l10n_ve_evo_310000', 'l10n_ve_evo_390000',
-    'l10n_ve_evo_410000', 'l10n_ve_evo_420000', 'l10n_ve_evo_490000',
-    'l10n_ve_evo_511000', 'l10n_ve_evo_601000', 'l10n_ve_evo_611100',
-    'l10n_ve_evo_621000', 'l10n_ve_evo_700000', 'l10n_ve_evo_710000',
-    'l10n_ve_evo_720000', 'l10n_ve_evo_730000', 'l10n_ve_evo_740000',
-    'l10n_ve_evo_stock_journal', 'l10n_ve_evo_stock_valuation_journal',
-    'l10n_ve_evo_tax_group_iva_16', 'l10n_ve_evo_tax_group_iva_8', 'l10n_ve_evo_tax_group_exento',
-    'l10n_ve_evo_iva_sale_16', 'l10n_ve_evo_iva_purchase_16',
-    'l10n_ve_evo_iva_sale_8', 'l10n_ve_evo_iva_sale_exento',
-    'l10n_ve_evo_domestic_fp', 'l10n_ve_evo_contribuyente_fp', 'l10n_ve_evo_export_fp',
-]
-
-def _ensure_records_exist(env):
-    """Verifica que los xml ids listados existan en la base."""
-    missing = []
-    for xml_id in XML_IDS_TO_CHECK:
-        full_xmlid = f'{MODULE}.{xml_id}'
-        res = env.ref(full_xmlid, raise_if_not_found=False)
-        if not res:
-            missing.append(full_xmlid)
-    if missing:
-        _logger.warning("Faltan xml ids tras instalar %s: %s", MODULE, ', '.join(missing))
-
 def create_company_if_missing(env):
-    """Hook post-init para crear compañía y vincularla correctamente antes de cargar datos."""
+    """
+    Hook post-init: 
+    1. Crea/Ubica la compañía.
+    2. Vincula el ID externo (company_main).
+    3. Asigna registros huérfanos (impuestos/diarios) a la compañía.
+    4. Fuerza la activación de impuestos y posiciones fiscales.
+    """
     env = env(user=SUPERUSER_ID)
     _logger.info("Iniciando post-init hook para %s", MODULE)
     
     Company = env['res.company']
-    Partner = env['res.partner']
     Imd = env['ir.model.data']
 
-    # 1. Localizar o crear compañía
+    # 1. Localizar o crear la compañía MOTOFIT
     company = Company.search(['|', ('vat', '=', COMPANY_VAT), ('name', '=', COMPANY_NAME)], limit=1)
-    
     if not company:
-        partner = Partner.create({
+        partner = env['res.partner'].create({
             'name': COMPANY_NAME,
             'is_company': True,
             'vat': COMPANY_VAT,
             'country_id': env.ref('base.ve').id,
         })
-        
         company = Company.create({
             'name': COMPANY_NAME, 
             'partner_id': partner.id,
+            'country_id': env.ref('base.ve').id,
             'currency_id': env.ref('base.VED', raise_if_not_found=False).id if env.ref('base.VED', raise_if_not_found=False) else env.company.currency_id.id
         })
+        _logger.info("Compañía %s creada.", COMPANY_NAME)
     
-    # 2. Asegurar ID Externo
+    # 2. Asegurar el ID Externo para que los XML puedan usar ref('l10n_ve_evo.company_main')
     exist_id = Imd.search([('module', '=', MODULE), ('name', '=', EXTERNAL_ID_NAME)], limit=1)
     if not exist_id:
         Imd.create({
@@ -76,23 +49,50 @@ def create_company_if_missing(env):
             'res_id': company.id,
             'noupdate': True
         })
+        _logger.info("ID Externo %s vinculado a la compañía.", EXTERNAL_ID_NAME)
 
-    # 3. Verificación de registros
-    _ensure_records_exist(env)
+    # 3. Vincular registros del módulo a la compañía (CRÍTICO para visibilidad)
+    # Buscamos registros creados por este módulo que no tengan compañía asignada
+    models_to_link = [
+        ('account.tax.group', 'Grupos de Impuestos'),
+        ('account.tax', 'Impuestos'),
+        ('account.fiscal.position', 'Posiciones Fiscales'),
+        ('account.journal', 'Diarios'),
+        ('account.group', 'Grupos de Cuentas')
+    ]
+    
+    for model_name, label in models_to_link:
+        try:
+            # Buscamos registros cuyos External IDs empiecen por el nombre de nuestro módulo
+            # y que no tengan compañía (o tengan la compañía por defecto)
+            records = env[model_name].search([
+                '|', ('company_id', '=', False), ('company_id', '!=', company.id)
+            ])
+            
+            for rec in records:
+                # Obtenemos el XML ID completo (ej: l10n_ve_evo.l10n_ve_evo_iva_sale_16)
+                xml_info = rec.get_external_id().get(rec.id)
+                if xml_info and xml_info.startswith(MODULE):
+                    rec.write({'company_id': company.id})
+                    _logger.info("Registro %s [%s] vinculado a MOTOFIT.", label, rec.name)
+        except Exception as e:
+            _logger.error("Error vinculando %s: %s", label, e)
 
-    # 4. Activar impuestos
-    try:
-        taxes = [
-            f'{MODULE}.l10n_ve_evo_iva_sale_16',
-            f'{MODULE}.l10n_ve_evo_iva_purchase_16',
-            f'{MODULE}.l10n_ve_evo_iva_sale_8',
-            f'{MODULE}.l10n_ve_evo_iva_sale_exento',
-        ]
-        for xmlid in taxes:
-            tax = env.ref(xmlid, raise_if_not_found=False)
-            if tax and not tax.active:
-                tax.active = True
-    except Exception as e:
-        _logger.error("Error activando impuestos: %s", e)
+    # 4. Forzar activación masiva
+    _force_activation(env, company)
 
-    _logger.info("Hook de post-instalación finalizado.")
+    _logger.info("Hook de post-instalación finalizado exitosamente.")
+
+def _force_activation(env, company):
+    """Activa impuestos y posiciones fiscales para la compañía específica."""
+    # Activar Impuestos de la compañía
+    taxes = env['account.tax'].search([('company_id', '=', company.id), ('active', '=', False)])
+    if taxes:
+        taxes.write({'active': True})
+        _logger.info("%s impuestos activados.", len(taxes))
+    
+    # Activar Posiciones Fiscales de la compañía
+    fps = env['account.fiscal.position'].search([('company_id', '=', company.id), ('active', '=', False)])
+    if fps:
+        fps.write({'active': True})
+        _logger.info("%s posiciones fiscales activadas.", len(fps))
