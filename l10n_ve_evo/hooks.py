@@ -51,9 +51,15 @@ def _ensure_records_exist(env):
 # -------------------------
 def create_company_if_missing(env):
     """Hook post-init para crear/verificar compañía, XML IDs e impuestos."""
-    env = env.sudo()
-    _logger.info("Iniciando post-init hook para %s", MODULE)
+    # Hacer sudo solo si el objeto env soporta el método
+    try:
+        env = env.sudo()
+    except AttributeError:
+        # env no tiene sudo (ya es sudo o es otro tipo); continuar con el objeto tal cual
+        pass
 
+    _logger.info("Iniciando post-init hook para %s", MODULE)
+    
     # 1) Verificar/crear compañía
     Company = env['res.company']
     Partner = env['res.partner']
