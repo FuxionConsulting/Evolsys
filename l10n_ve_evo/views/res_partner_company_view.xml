@@ -23,15 +23,17 @@
                 <!-- Campos geográficos específicos para Venezuela -->
                 <xpath expr="//field[@name='state_id']" position="after">
                     <!-- 
-                        CORRECCIÓN DE DOMINIOS:
-                        - city_id en Odoo (res.city) tiene state_id, pero no country_id directamente.
-                        - Se ajusta la visibilidad para que no se muestren si no hay estado seleccionado.
+                        SOLUCIÓN DEFINITIVA AL ParseError:
+                        Forzamos el dominio a solo state_id. 
+                        Añadimos 'force_save' y sobreescribimos cualquier dominio previo de base_address_extended
+                        que intente buscar 'country_id' en res.city.
                     -->
                     <field name="city_id" 
                            placeholder="Ciudad" 
                            options="{'no_create': True}" 
                            domain="[('state_id', '=', state_id)]"
-                           invisible="country_code != 'VE' or not state_id"/>
+                           invisible="country_code != 'VE' or not state_id"
+                           force_save="1"/>
 
                     <field name="municipality_id" 
                            placeholder="Municipio" 
