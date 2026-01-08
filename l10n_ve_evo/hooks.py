@@ -11,14 +11,13 @@ COMPANY_NAME = 'MOTOFIT PRO, C.A'
 COMPANY_VAT = 'J507849082'
 EXTERNAL_ID_NAME = 'company_main'
 
-# Lista de archivos que deben cargarse manualmente después de crear la compañía
-# para evitar errores de validación y asegurar la vinculación correcta.
+# Lista corregida con los nombres exactos de tus archivos .xml
 DATA_FILES = [
     'data/account.group-ve.xml',
     'data/account.tax.group.xml',
     'data/account.journal.xml',
     'data/account.fiscal.position.xml',
-    'data/account_account_ve.xml',
+    'data/account_account_ve.xml', # Asegúrate que el archivo se llame así en la carpeta data
 ]
 
 def create_company_if_missing(env):
@@ -33,68 +32,58 @@ def create_company_if_missing(env):
     Company = env['res.company']
     Imd = env['ir.model.data']
 
-    # 1. Localizar o crear la compañía MOTOFIT
-    company = Company.search(['|', ('vat', '=', COMPANY_VAT), ('name', '=', COMPANY_NAME)], limit=1)
+    # 1. Localizar o crear la compañía
+    company = Company.search(['|', ('name', '=', COMPANY_NAME), ('vat', '=', COMPANY_VAT)], limit=1)
+    
     if not company:
-        partner = env['res.partner'].create({
+        _logger.info("Creando compañía %s", COMPANY_NAME)
+        company = Company.create({
             'name': COMPANY_NAME,
-            'is_company': True,
             'vat': COMPANY_VAT,
             'country_id': env.ref('base.ve').id,
+            'currency_id': env.ref('base.VED').id, # Asegúrate que el ISO de Bolívares sea VED o VES
         })
-        # Intentar asignar VED (Bolívar Digital)
-        currency = env.ref('base.VED', raise_if_not_found=False)
-        company = Company.create({
-            'name': COMPANY_NAME, 
-            'partner_id': partner.id,
-            'currency_id': currency.id if currency else env.company.currency_id.id
-        })
-        _logger.info("Compañía '%s' creada satisfactoriamente.", COMPANY_NAME)
     
-    # 2. Asegurar que el ID Externo 'company_main' existe para los XMLs
-    exist_id = Imd.search([('module', '=', MODULE), ('name', '=', EXTERNAL_ID_NAME)], limit=1)
-    if not exist_id:
+    # Asegurar el External ID para que otros XML puedan referenciarlo si es necesario
+    imd_rec = Imd.search([('module', '=', MODULE), ('name', '=', EXTERNAL_ID_NAME)])
+    if not imd_rec:
         Imd.create({
-            'module': MODULE, 
-            'name': EXTERNAL_ID_NAME, 
-            'model': 'res.company', 
+            'module': MODULE,
+            'name': EXTERNAL_ID_NAME,
+            'model': 'res.company',
             'res_id': company.id,
-            'noupdate': True
+            'noupdate': True,
         })
-        _logger.info("External ID '%s' vinculado a la compañía.", EXTERNAL_ID_NAME)
 
-    # 3. CARGA MANUAL DE TODOS LOS DATOS CONTABLES
-    # Recorremos la lista de archivos definidos en DATA_FILES
-    for xml_file in DATA_FILES:
-        _load_data_file(env, xml_file)
+    # 2. Cargar los archivos de datos manualmente
+    _load_data_files(env)
 
-    # 4. Vincular registros que pudieran haber quedado huérfanos
+    # 3. Vincular registros huérfanos
     _assign_orphans(env, company)
-
-    # 5. Activar impuestos y posiciones
+    
+    # 4. Forzar activación
     _force_activation(env, company)
 
-    _logger.info("Proceso de post-instalación completado con éxito.")
-
-def _load_data_file(env, relative_path):
-    """Función genérica para cargar archivos XML del módulo."""
-    try:
-        _logger.info("Importando archivo: %s", relative_path)
-        from odoo.modules.module import get_resource_path
-        
-        file_path = get_resource_path(MODULE, relative_path)
-        
-        if file_path and os.path.exists(file_path):
-            with open(file_path, 'rb') as f:
-                convert.convert_xml_import(env.cr, MODULE, f, idref={}, mode='init', noupdate=False)
-            _logger.info("Archivo %s cargado exitosamente.", relative_path)
-        else:
-            _logger.error("No se encontró el archivo en: %s", relative_path)
-    except Exception as e:
-        _logger.error("Error cargando %s: %s", relative_path, e)
+def _load_data_files(env):
+    """Carga los archivos XML definidos en DATA_FILES."""
+    for relative_path in DATA_FILES:
+        try:
+            # Construir ruta absoluta
+            path = os.path.join(os.path.dirname(__file__), relative_path.replace('data/', ''))
+            # Si los archivos están dentro de una carpeta 'data', asegúrate de que la ruta sea correcta
+            # Aquí asumimos que están en la subcarpeta 'data' del módulo
+            real_path = os.path.join(os.path.dirname(__file__), '..', relative_path)
+            
+            if os.path.exists(real_path):
+                _logger.info("Cargando archivo de datos: %s", relative_path)
+                convert.convert_file(env.cr, MODULE, relative_path, {}, 'init', noupdate=False)
+            else:
+                _logger.error("No se encontró el archivo: %s", real_path)
+        except Exception as e:
+            _logger.error("Error cargando %s: %s", relative_path, e)
 
 def _assign_orphans(env, company):
-    """Vincula impuestos, diarios y posiciones que se cargaron sin compañía asignada."""
+    """Vincula registros cargados por XML a la compañía creada."""
     models = [
         ('account.tax', 'Impuestos'),
         ('account.journal', 'Diarios'),
@@ -103,23 +92,14 @@ def _assign_orphans(env, company):
         ('account.account', 'Cuentas')
     ]
     for model_name, label in models:
-        try:
-            # Buscamos registros de este módulo sin compañía
-            domain = [('company_id', '=', False)]
-            records = env[model_name].search(domain)
-            for rec in records:
-                xml_id = rec.get_external_id().get(rec.id)
-                if xml_id and xml_id.startswith(MODULE):
-                    rec.write({'company_id': company.id})
-                    _logger.debug("Sincronizado %s: %s", label, rec.name)
-        except Exception as e:
-            _logger.error("Error al vincular registros de %s: %s", label, e)
+        records = env[model_name].search([('company_id', '=', False)])
+        for rec in records:
+            # Verificar si el registro pertenece a este módulo mediante su XML ID
+            xml_id = rec.get_external_id().get(rec.id)
+            if xml_id and xml_id.startswith(MODULE):
+                rec.write({'company_id': company.id})
 
 def _force_activation(env, company):
-    """Asegura que los impuestos y posiciones fiscales estén activos."""
-    try:
-        env['account.tax'].search([('company_id', '=', company.id)]).write({'active': True})
-        env['account.fiscal.position'].search([('company_id', '=', company.id)]).write({'active': True})
-        _logger.info("Configuración contable activada.")
-    except Exception as e:
-        _logger.error("Error activando configuración: %s", e)
+    """Activa los registros para la compañía."""
+    env['account.tax'].search([('company_id', '=', company.id)]).write({'active': True})
+    env['account.fiscal.position'].search([('company_id', '=', company.id)]).write({'active': True})
