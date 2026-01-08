@@ -4,7 +4,7 @@
     'summary': 'Localización Contable para Venezuela (VE) para Odoo 19',
     'category': 'Accounting/Localizations/Account Charts',
     'countries': ['ve'],
-    'version': '19.0.2.6.1',
+    'version': '19.0.2.6.2',
     'depends': [
         'base',
         'base_setup',
@@ -20,6 +20,7 @@
         'data/res.country.parish.csv',
         'data/res.city.csv',
         'data/account.group-ve.xml',
+        'data/account_account_data.xml',
         'data/account.tax.group.xml','data/account.journal.xml',
         'data/account.fiscal.position.xml',
         'views/res_partner_company_view.xml',
