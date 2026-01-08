@@ -42,7 +42,6 @@ def _ensure_records_exist(env):
 
 def create_company_if_missing(env):
     """Hook post-init para crear compañía y vincularla correctamente antes de cargar datos."""
-    # Forzar modo superusuario y asegurar que trabajamos con la base de datos correcta
     env = env(user=SUPERUSER_ID)
     _logger.info("Iniciando post-init hook para %s", MODULE)
     
@@ -50,11 +49,10 @@ def create_company_if_missing(env):
     Partner = env['res.partner']
     Imd = env['ir.model.data']
 
-    # 1. Intentar localizar la compañía por RIF (VAT) o Nombre
+    # 1. Localizar o crear compañía
     company = Company.search(['|', ('vat', '=', COMPANY_VAT), ('name', '=', COMPANY_NAME)], limit=1)
     
     if not company:
-        _logger.info("Creando partner para la compañía...")
         partner = Partner.create({
             'name': COMPANY_NAME,
             'is_company': True,
@@ -62,15 +60,13 @@ def create_company_if_missing(env):
             'country_id': env.ref('base.ve').id,
         })
         
-        _logger.info("Creando compañía %s...", COMPANY_NAME)
         company = Company.create({
             'name': COMPANY_NAME, 
             'partner_id': partner.id,
             'currency_id': env.ref('base.VED', raise_if_not_found=False).id if env.ref('base.VED', raise_if_not_found=False) else env.company.currency_id.id
         })
     
-    # 2. Vincular el External ID manualmente (CRÍTICO)
-    # Esto permite que los archivos XML usen ref('l10n_ve_evo.company_main') sin fallar
+    # 2. Asegurar ID Externo
     exist_id = Imd.search([('module', '=', MODULE), ('name', '=', EXTERNAL_ID_NAME)], limit=1)
     if not exist_id:
         Imd.create({
@@ -80,17 +76,11 @@ def create_company_if_missing(env):
             'res_id': company.id,
             'noupdate': True
         })
-        _logger.info("External ID %s asignado a la compañía %s", EXTERNAL_ID_NAME, company.name)
 
-    # 3. Solución al error de diarios: 
-    # Si Odoo creó diarios automáticos al crear la compañía, 
-    # los marcamos para que no interfieran o los dejamos listos.
-    # El error suele venir porque el XML intenta crear 'l10n_ve_evo_stock_journal' 
-    # y hay un conflicto de borrado de otros diarios de la misma compañía.
-    
+    # 3. Verificación de registros
     _ensure_records_exist(env)
 
-    # 4. Activación de impuestos (si ya fueron cargados por el XML de data)
+    # 4. Activar impuestos
     try:
         taxes = [
             f'{MODULE}.l10n_ve_evo_iva_sale_16',
@@ -102,8 +92,7 @@ def create_company_if_missing(env):
             tax = env.ref(xmlid, raise_if_not_found=False)
             if tax and not tax.active:
                 tax.active = True
-                _logger.info("Impuesto activado: %s", xmlid)
     except Exception as e:
         _logger.error("Error activando impuestos: %s", e)
 
-    _logger.info("Hook de post-instalación finalizado exitosamente.")
+    _logger.info("Hook de post-instalación finalizado.")
