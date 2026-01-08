@@ -18,7 +18,7 @@ DATA_FILES = [
     'data/account.tax.group.xml',
     'data/account.journal.xml',
     'data/account.fiscal.position.xml',
-    'data/account_account_data.xml',
+    'data/account_account_ve.xml',
 ]
 
 def create_company_if_missing(env):

@@ -9,31 +9,27 @@
 
                 <!-- Insertar rif_type antes de vat -->
                 <xpath expr="//field[@name='vat']" position="before">
-                    <field name="rif_type" 
-                           invisible="company_type == 'person'"/>
+                    <field name="rif_type" invisible="company_type == 'person'"/>
                 </xpath>
 
                 <!-- Modificar VAT (placeholder RIF para VE) -->
                 <xpath expr="//field[@name='vat']" position="attributes">
                     <attribute name="placeholder">RIF</attribute>
-                    <!-- Visibilidad basada en el código de país -->
                     <attribute name="invisible">country_code != 'VE'</attribute>
                 </xpath>
 
                 <!-- Campos geográficos específicos para Venezuela -->
-                <xpath expr="//field[@name='state_id']" position="after">
-                    <!-- 
-                        ELIMINACIÓN DEL ERROR DE DOMINIO:
-                        Usamos un XPath específico para 'city_id' si ya existe o lo definimos de cero.
-                        Forzamos el atributo 'domain' para que sea simple y no busque 'country_id'.
-                    -->
+                <!-- Reemplazamos el city_id original para evitar el error de validación de dominio del core -->
+                <xpath expr="//field[@name='city_id']" position="replace">
                     <field name="city_id" 
                            placeholder="Ciudad" 
                            options="{'no_create': True}" 
                            domain="[('state_id', '=', state_id)]"
                            invisible="country_code != 'VE' or not state_id"
                            force_save="1"/>
+                </xpath>
 
+                <xpath expr="//field[@name='state_id']" position="after">
                     <field name="municipality_id" 
                            placeholder="Municipio" 
                            options="{'no_create': True}" 
@@ -45,14 +41,6 @@
                            options="{'no_create': True}" 
                            domain="[('municipality_id', '=', municipality_id)]"
                            invisible="country_code != 'VE' or not municipality_id"/>
-                </xpath>
-
-                <!-- 
-                    Ajuste adicional por si el campo ya estaba en la vista padre con el dominio erróneo.
-                    Intentamos limpiar cualquier definición previa de city_id que cause el ParseError.
-                -->
-                <xpath expr="//field[@name='city_id']" position="attributes">
-                    <attribute name="domain">[('state_id', '=', state_id)]</attribute>
                 </xpath>
 
             </field>
