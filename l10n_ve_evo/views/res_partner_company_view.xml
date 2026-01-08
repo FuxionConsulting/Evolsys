@@ -16,15 +16,16 @@
                 <!-- Modificar VAT (placeholder RIF para VE) -->
                 <xpath expr="//field[@name='vat']" position="attributes">
                     <attribute name="placeholder">RIF</attribute>
+                    <!-- Visibilidad basada en el código de país -->
                     <attribute name="invisible">country_code != 'VE'</attribute>
                 </xpath>
 
                 <!-- Campos geográficos específicos para Venezuela -->
                 <xpath expr="//field[@name='state_id']" position="after">
                     <!-- 
-                        CORRECCIÓN DE DOMINIO: 
-                        Se elimina 'country_id' del dominio de city_id ya que res.city no posee ese campo.
-                        Se filtra únicamente por el estado seleccionado.
+                        CORRECCIÓN DE DOMINIOS:
+                        - city_id en Odoo (res.city) tiene state_id, pero no country_id directamente.
+                        - Se ajusta la visibilidad para que no se muestren si no hay estado seleccionado.
                     -->
                     <field name="city_id" 
                            placeholder="Ciudad" 
