@@ -7,19 +7,23 @@
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
 
-                <!-- Insertar rif_type antes de vat -->
+                <!-- 1. Manejo del RIF -->
                 <xpath expr="//field[@name='vat']" position="before">
                     <field name="rif_type" invisible="company_type == 'person'"/>
                 </xpath>
 
-                <!-- Modificar VAT (placeholder RIF para VE) -->
                 <xpath expr="//field[@name='vat']" position="attributes">
                     <attribute name="placeholder">RIF</attribute>
                     <attribute name="invisible">country_code != 'VE'</attribute>
                 </xpath>
 
-                <!-- Campos geográficos específicos para Venezuela -->
-                <!-- Reemplazamos el city_id original para evitar el error de validación de dominio del core -->
+                <!-- 
+                     2. SOLUCIÓN DEFINITIVA AL ERROR DE VALIDACIÓN:
+                     En lugar de modificar el atributo 'domain', usamos un xpath para
+                     REEMPLAZAR completamente cualquier campo city_id que Odoo intente validar
+                     en la vista base. Al usar position="replace", el dominio conflictivo 
+                     desaparece del árbol de XML antes de la validación final.
+                -->
                 <xpath expr="//field[@name='city_id']" position="replace">
                     <field name="city_id" 
                            placeholder="Ciudad" 
@@ -29,6 +33,7 @@
                            force_save="1"/>
                 </xpath>
 
+                <!-- 3. Insertar el resto de los campos de la localización -->
                 <xpath expr="//field[@name='state_id']" position="after">
                     <field name="municipality_id" 
                            placeholder="Municipio" 
@@ -41,6 +46,19 @@
                            options="{'no_create': True}" 
                            domain="[('municipality_id', '=', municipality_id)]"
                            invisible="country_code != 'VE' or not municipality_id"/>
+                </xpath>
+
+                <!-- 
+                    4. Limpieza de seguridad:
+                    Si existe un div de dirección que contenga city_id, forzamos su reemplazo
+                    para que no quede ninguna referencia al modelo res.city con el dominio country_id.
+                -->
+                <xpath expr="//div[contains(@class, 'o_address_format')]//field[@name='city_id']" position="replace">
+                     <field name="city_id" 
+                           placeholder="Ciudad" 
+                           options="{'no_create': True}" 
+                           domain="[('state_id', '=', state_id)]"
+                           invisible="country_code != 'VE' or not state_id"/>
                 </xpath>
 
             </field>
