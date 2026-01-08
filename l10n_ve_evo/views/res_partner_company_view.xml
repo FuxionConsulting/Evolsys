@@ -16,30 +16,34 @@
                 <!-- Modificar VAT (placeholder RIF para VE) -->
                 <xpath expr="//field[@name='vat']" position="attributes">
                     <attribute name="placeholder">RIF</attribute>
-                    <!-- Nota: En Odoo 19 se prefiere manejar la visibilidad por país mediante lógica de grupos o campos computados, 
-                         pero aquí ajustamos la sintaxis para que sea compatible -->
+                    <!-- Visibilidad basada en el código de país -->
                     <attribute name="invisible">country_code != 'VE'</attribute>
                 </xpath>
 
-                <!-- Campos geográficos -->
+                <!-- Campos geográficos específicos para Venezuela -->
                 <xpath expr="//field[@name='state_id']" position="after">
+                    <!-- 
+                         CORRECCIÓN DE DOMINIOS:
+                         - city_id en Odoo (res.city) suele tener state_id, no country_id directamente.
+                         - municipality_id y parish_id son campos personalizados de tu localización.
+                    -->
                     <field name="city_id" 
                            placeholder="Ciudad" 
                            options="{'no_create': True}" 
                            domain="[('state_id', '=', state_id)]"
-                           invisible="country_code != 'VE'"/>
+                           invisible="country_code != 'VE' or not state_id"/>
 
                     <field name="municipality_id" 
                            placeholder="Municipio" 
                            options="{'no_create': True}" 
                            domain="[('state_id', '=', state_id)]"
-                           invisible="country_code != 'VE'"/>
+                           invisible="country_code != 'VE' or not state_id"/>
 
                     <field name="parish_id" 
                            placeholder="Parroquia" 
                            options="{'no_create': True}" 
                            domain="[('municipality_id', '=', municipality_id)]"
-                           invisible="country_code != 'VE'"/>
+                           invisible="country_code != 'VE' or not municipality_id"/>
                 </xpath>
 
             </field>
