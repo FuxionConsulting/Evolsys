@@ -25,7 +25,7 @@
         'data/res.country.parish.csv',
         'data/res.city.csv',
         'data/account.group-ve.xml',
-        'data/account.account-ve.xml',        
+        #'data/account.account-ve.xml',        
         'data/account.tax.group.xml',
         'data/account.tax.xml',
         'data/account.journal.xml',
