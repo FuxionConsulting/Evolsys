@@ -27,7 +27,7 @@
         'views/res_partner_company_view.xml',
         'views/res_partner_person_view.xml',
     ],
-    'post_init_hook': 'create_company_if_missing',
+    'post_init_hook': 'post_init_hook',
     'auto_install': False,
     'installable': True,
     'images': ['static/description/icon.png'],
