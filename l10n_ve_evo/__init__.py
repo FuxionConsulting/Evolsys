@@ -1,2 +1,3 @@
 from . import models
-from .hooks import _post_init_hook, uninstall_hook
+from . import hooks
+from .hooks import create_company_if_missing

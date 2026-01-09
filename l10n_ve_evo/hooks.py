@@ -1,137 +1,104 @@
-# -*- coding: utf-8 -*-
+from odoo import api, SUPERUSER_ID
+from odoo.tools import convert
 import logging
-from odoo import SUPERUSER_ID
+import os
 
 _logger = logging.getLogger(__name__)
 
-# ---------------------------------------------------------
-# POST INIT HOOK (Odoo 19)
-# ---------------------------------------------------------
-def _post_init_hook(env):
+# Constantes del módulo
+MODULE = 'l10n_ve_evo'
+COMPANY_NAME = 'MOTOFIT PRO, C.A'
+COMPANY_VAT = 'J507849082'
+EXTERNAL_ID_NAME = 'company_main'
+
+# Lista corregida con los nombres exactos de tus archivos .xml
+DATA_FILES = [
+    'data/account.group-ve.xml',
+    'data/account.tax.group.xml',
+    'data/account.journal.xml',
+    'data/account.fiscal.position.xml',
+    'data/account_account_ve.xml', 
+]
+
+def create_company_if_missing(env):
     """
-    Post-init hook para l10n_ve_evo:
-    - Activa el chart template 've' en Venezuela.
-    - Instala el plan de cuentas en la compañía principal.
-    - Ajusta cuentas por defecto exigidas por Odoo 19.
-    - Configura ajustes contables visibles en res.config.settings.
+    Hook post-init para la localización de Venezuela:
+    1. Asegura la existencia de la compañía y su ID externo.
+    2. Carga manualmente todos los XMLs contables.
     """
-    try:
-        # 1) Obtener país VE
-        ve = env.ref('base.ve', raise_if_not_found=False) or env['res.country'].search([('code', '=', 'VE')], limit=1)
-        if not ve:
-            _logger.error('[l10n_ve_evo] No se encontró el país VE.')
-            return
+    env = env(user=SUPERUSER_ID)
+    _logger.info("Iniciando post-init hook para %s", MODULE)
+    
+    Company = env['res.company']
+    Imd = env['ir.model.data']
 
-        # 2) Obtener el chart template registrado con @template('ve')
-        chart_template = env.ref('l10n_ve_evo.ve_chart_template', raise_if_not_found=False)
-        if not chart_template:
-            chart_template = env['account.chart.template'].search([('name', '=', 'Evolsys')], limit=1)
+    # 1. Localizar o crear la compañía
+    company = Company.search(['|', ('name', '=', COMPANY_NAME), ('vat', '=', COMPANY_VAT)], limit=1)
+    
+    if not company:
+        _logger.info("Creando compañía %s", COMPANY_NAME)
+        company = Company.create({
+            'name': COMPANY_NAME,
+            'vat': COMPANY_VAT,
+            'country_id': env.ref('base.ve').id,
+            'currency_id': env.ref('base.VED', raise_if_not_found=False).id if env.ref('base.VED', raise_if_not_found=False) else env.ref('base.VES').id,
+        })
+    
+    # Asegurar el External ID
+    imd_rec = Imd.search([('module', '=', MODULE), ('name', '=', EXTERNAL_ID_NAME)])
+    if not imd_rec:
+        Imd.create({
+            'module': MODULE,
+            'name': EXTERNAL_ID_NAME,
+            'model': 'res.company',
+            'res_id': company.id,
+            'noupdate': True,
+        })
 
-        if not chart_template:
-            _logger.error('[l10n_ve_evo] No se encontró el chart template Evolsys.')
-            return
+    # 2. Cargar los archivos de datos manualmente
+    _load_data_files(env)
 
-        # 3) Asignar el chart template al país VE
-        chart_template.country_id = ve.id
-        _logger.info('[l10n_ve_evo] Chart template Evolsys asignado al país VE.')
+    # 3. Vincular registros huérfanos
+    _assign_orphans(env, company)
+    
+    # 4. Forzar activación
+    _force_activation(env, company)
 
-        # 4) Instalar el plan de cuentas en la compañía principal
-        company = env['res.company'].search([], limit=1)
-        if company:
-            try:
-                chart_template.try_loading(company)
-                _logger.info('[l10n_ve_evo] Plan de cuentas Evolsys instalado en la compañía %s.', company.name)
-            except Exception:
-                _logger.exception('[l10n_ve_evo] Error instalando plan de cuentas Evolsys en la compañía.')
-
-        # 5) Ajustar cuentas por defecto exigidas por Odoo 19 (ir.default)
-        defaults_map = {
-            'property_account_receivable_id': 'l10n_ve_evo.l10n_ve_evo_130000',
-            'property_account_payable_id': 'l10n_ve_evo.l10n_ve_evo_210000',
-            'downpayment_account_id': 'l10n_ve_evo.l10n_ve_evo_115000',
-        }
-        for field, xmlid in defaults_map.items():
-            rec = env.ref(xmlid, raise_if_not_found=False)
-            if rec and company:
-                try:
-                    env['ir.default'].set('res.company', field, rec.id, company_id=company.id)
-                    _logger.info('[l10n_ve_evo] ir.default set %s -> %s', field, xmlid)
-                except Exception:
-                    _logger.exception('[l10n_ve_evo] Error asignando default %s con xmlid %s', field, xmlid)
-
-        # 6) Establecer cuentas por defecto en res.config.settings (ajustes contables)
+def _load_data_files(env):
+    """Carga los archivos XML definidos en DATA_FILES."""
+    for relative_path in DATA_FILES:
         try:
-            config_vals = {}
-            def safe_ref(xmlid):
-                return env.ref(xmlid, raise_if_not_found=False)
+            # Intentar encontrar la ruta real del archivo
+            # Odoo busca los archivos relativos a la raíz del addon
+            _logger.info("Cargando archivo de datos: %s", relative_path)
+            convert.convert_file(env.cr, MODULE, relative_path, {}, 'init', noupdate=False)
+        except Exception as e:
+            _logger.error("Error cargando %s: %s", relative_path, e)
 
-            mapping = {
-                'income_account_id': 'l10n_ve_evo.l10n_ve_evo_700000',
-                'expense_account_id': 'l10n_ve_evo.l10n_ve_evo_611100',
-                'downpayment_account_id': 'l10n_ve_evo.l10n_ve_evo_115000',
-                'account_stock_valuation_id': 'l10n_ve_evo.l10n_ve_evo_140000',
-                'account_journal_stock_valuation_id': 'l10n_ve_evo.l10n_ve_evo_stock_valuation_journal',
-            }
-
-            for field, xmlid in mapping.items():
-                rec = safe_ref(xmlid)
-                if rec:
-                    config_vals[field] = rec.id
-                else:
-                    _logger.warning('[l10n_ve_evo] No se encontró xmlid para %s -> %s', field, xmlid)
-
-            if config_vals:
-                settings = env['res.config.settings'].create(config_vals)
-                settings.execute()
-                _logger.info('[l10n_ve_evo] Configuración contable aplicada en res.config.settings.')
-            else:
-                _logger.warning('[l10n_ve_evo] No se aplicó configuración contable: ningún xmlid válido encontrado.')
-
+def _assign_orphans(env, company):
+    """Vincula registros cargados por XML a la compañía creada."""
+    models = [
+        ('account.tax', 'Impuestos'),
+        ('account.journal', 'Diarios'),
+        ('account.fiscal.position', 'Posiciones Fiscales'),
+        ('account.group', 'Grupos de Cuentas'),
+        ('account.account', 'Cuentas')
+    ]
+    for model_name, label in models:
+        try:
+            records = env[model_name].search([('company_id', '=', False)])
+            for rec in records:
+                xml_id_dict = rec.get_external_id()
+                xml_id = xml_id_dict.get(rec.id)
+                if xml_id and xml_id.startswith(MODULE):
+                    rec.write({'company_id': company.id})
         except Exception:
-            _logger.exception('[l10n_ve_evo] Error aplicando configuración contable en ajustes.')
+            continue
 
-    except Exception as e:
-        _logger.exception('[l10n_ve_evo] Error en _post_init_hook: %s', e)
-
-
-# ---------------------------------------------------------
-# UNINSTALL HOOK (Odoo 19)
-# ---------------------------------------------------------
-def uninstall_hook(env):
-    """
-    Uninstall hook: limpia geografía creada por el módulo, restaura tax groups y chart template,
-    y revierte cambios en impuestos.
-    """
+def _force_activation(env, company):
+    """Activa los registros para la compañía."""
     try:
-        for model in ['res.country.parish', 'res.country.municipality', 'res.city']:
-            records = env[model].search([('create_uid', '=', SUPERUSER_ID)])
-            if records:
-                count = len(records)
-                records.unlink()
-                _logger.info('[l10n_ve_evo] Eliminados %d registros de %s.', count, model)
-
-        groups = env['account.tax.group'].search([('country_id.code', '=', 'VE')])
-        if groups:
-            groups.write({'country_id': False})
-            _logger.info('[l10n_ve_evo] Restaurado country_id en %d tax groups.', len(groups))
-
-        chart_template = env.ref('l10n_ve_evo.ve_chart_template', raise_if_not_found=False)
-        if chart_template:
-            try:
-                chart_template.country_id = False
-                _logger.info('[l10n_ve_evo] Chart template restaurado.')
-            except Exception:
-                _logger.exception('[l10n_ve_evo] Error restaurando chart template.')
-
-        for xmlid in ['l10n_ve_evo.l10n_ve_evo_iva_sale_16', 'l10n_ve_evo.l10n_ve_evo_iva_sale_8']:
-            tax = env.ref(xmlid, raise_if_not_found=False)
-            if tax:
-                try:
-                    refund_lines = tax.refund_repartition_line_ids.filtered(lambda l: l.repartition_type == 'tax')
-                    refund_lines.write({'factor_percent': 100})
-                    _logger.info('[l10n_ve_evo] Restaurado refund factor para impuesto %s.', tax.name)
-                except Exception:
-                    _logger.exception('[l10n_ve_evo] Error restaurando refund factor para %s', xmlid)
-
-    except Exception as e:
-        _logger.exception('[l10n_ve_evo] Error en uninstall_hook: %s', e)
+        env['account.tax'].search([('company_id', '=', company.id)]).write({'active': True})
+        env['account.fiscal.position'].search([('company_id', '=', company.id)]).write({'active': True})
+    except Exception:
+        pass
