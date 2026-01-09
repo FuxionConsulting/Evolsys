@@ -24,7 +24,7 @@
                     o sección, evitando tocar el bloque de dirección estándar que está dando problemas.
                 -->
                 <xpath expr="//page[@name='internal_notes']" position="before">
-                    <page string="Localización VE" name="l10n_ve_location" invisible="country_code != 'VE'">
+                    <page string="Localización VE" name="l10n_ve_evo" invisible="country_code != 'VE'">
                         <group>
                             <group string="Ubicación Detallada">
                                 <field name="city_id" placeholder="Ciudad" options="{'no_create': True}"/>
