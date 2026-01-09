@@ -1,17 +1,22 @@
+# -*- coding: utf-8 -*-
+# Copyright 2024 - l10n_ve_evo
 {
     'name': 'Venezuela - Contabilidad (Evolsys)',
-    'author': 'Evolsys',
-    'summary': 'Localización Contable para Venezuela (VE) para Odoo 19',
-    'category': 'Accounting/Localizations',
     'countries': ['ve'],
-    'version': '19.0.2.7.3',
+    'author': 'Evolsys',
+    "summary": "Localización Contable para Venezuela",
+    'category': 'Accounting/Localizations/Account Charts',
+    "version": "19.0.2.1.2",
+    'summary': 'Localización Contable para Venezuela (VE) para Odoo 19',
     'depends': [
+        
         'base',
         'base_setup',
         'account',
         'accountant',
         'account_accountant',
         'rate_evo',
+        
     ],
     'data': [
         'security/ir.model.access.csv',
@@ -20,14 +25,18 @@
         'data/res.country.parish.csv',
         'data/res.city.csv',
         'data/account.group-ve.xml',
-        'data/account_account_ve.xml',
+        'data/account.account-ve.xml',        
         'data/account.tax.group.xml',
+        'data/account.tax.xml',
         'data/account.journal.xml',
         'data/account.fiscal.position.xml',
         'views/res_partner_company_view.xml',
         'views/res_partner_person_view.xml',
     ],
-    'post_init_hook': 'create_company_if_missing',
+    'post_init_hook': '_post_init_hook',
+    'uninstall_hook': 'uninstall_hook',
+
+   
     'auto_install': False,
     'installable': True,
     'images': ['static/description/icon.png'],

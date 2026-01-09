@@ -1,0 +1,6 @@
+<odoo>
+  <record id="country_ve" model="res.country">
+    <field name="name">Venezuela</field>
+    <field name="code">VE</field>
+  </record>
+</odoo>
