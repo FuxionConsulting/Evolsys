@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mo_validate_wizard_form_view" model="ir.ui.view">
+        <field name="name">mo.validate.wizard.form</field>
+        <field name="model">mo.validate.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Validar ordenes de Fabricacion">
+                <sheet>
+                    <field name="company_id" invisible="1"/> 
+                    
+                    <group>
+                        <field name="production_ids" readonly="1" string="ordenes Recibidas">
+                            <tree string="ordenes Recibidas">
+                                <field name="name"/>
+                                <field name="product_id"/>
+                                <field name="product_qty"/>
+                                <field name="date_start"/>
+                                <field name="state"/>
+                                <field name="company_id" invisible="1"/> 
+                            </tree>
+                        </field>
+                    </group>
+                    
+                    <separator string="Seleccionar ordenes a Validar"/>
+                    <group>
+                        <field name="selected_production_ids">
+                            <tree string="ordenes a Validar" editable="bottom">
+                                <field name="name"/>
+                                <field name="product_id"/>
+                                <field name="product_qty"/>
+                                <field name="date_start"/>
+                                <field name="state"/>
+                                <field name="company_id" invisible="1"/> 
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_validate_mos" string="Validar Seleccionadas" type="object" class="oe_highlight"/>
+                    <button string="Cerrar" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

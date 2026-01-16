@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mo_availability_check_wizard_form_view" model="ir.ui.view">
+        <field name="name">mo.availability.check.wizard.form</field>
+        <field name="model">mo.availability.check.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Verificacion de Disponibilidad de Materiales">
+                <sheet>
+                    <field name="production_ids" readonly="1"/>
+                    <button name="action_check_availability" string="Realizar Verificacion" type="object" class="oe_highlight"/>
+                    
+                    <field name="availability_info_ids">
+                        <tree string="Detalles de Disponibilidad" editable="bottom" create="false" delete="false">
+                            <field name="production_id"/>
+                            <field name="has_all_materials" decoration-success="has_all_materials == True" decoration-danger="has_all_materials == False"/>
+                            <field name="missing_materials_details" invisible="has_all_materials"/>
+                            <field name="message"/> </tree>
+                    </field>
+                </sheet>
+                <footer>
+                    <button name="action_proceed_to_validation" string="Continuar a Validacion" type="object" class="oe_highlight"/>
+                    <button string="Cerrar" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,35 @@
+{
+    "name": "Venezuela - Facturacion",
+    "summary": """
+        Modulo de Facturacion Venezuela
+    """,
+    "version": "17.0.0.0.6",
+    "license": "LGPL-3",
+    "author": "evolsys",
+    "website": "https://evolsys.net/",
+    "category": "Accounting/Localizations/Account Chart",
+    "depends": [
+        "l10n_ve_rate",
+        "l10n_ve_base",
+        "l10n_ve_accountant",
+        "l10n_ve_contact",
+        "l10n_ve_tax",
+        "od_journal_sequence",
+    ],
+    "data": [
+        "security/l10n_ve_invoice_groups.xml",
+        "security/ir.model.access.csv",
+        "security/ir_rule.xml",
+        "data/account_data.xml",
+        "data/invoice_free_form_paperformat.xml",
+        "report/report_ir_actions_report.xml",
+        "report/report_invoice_free_form.xml",
+        "views/account_move.xml",
+        "views/account_journal_views.xml",
+        "views/res_config_settings.xml",
+        "views/menu.xml",
+        "wizard/accounting_reports_views.xml",
+    ],
+    "images": ["static/description/icon.png"],
+    "application": True,
+}

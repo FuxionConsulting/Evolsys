@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mo_search_wizard_form_view" model="ir.ui.view">
+            <field name="name">mo.search.wizard.form</field>
+            <field name="model">mo.search.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Búsqueda de ordenes de Fabricacion">
+                    <sheet>
+                        <group>
+                            <field name="search_date"/> 
+                        </group>
+                        <footer>
+                            <button name="action_search_mos" string="Buscar OF" type="object" class="oe_highlight"/>
+                            <button string="Cancelar" class="oe_link" special="cancel"/>
+                        </footer>
+                        <group>
+                            <field name="has_productions" readonly="1"/> 
+                        </group>
+                        <group string="ordenes de Fabricacion Encontradas" invisible="not has_productions">
+                            <field name="production_ids">
+                                <tree string="ordenes de Fabricacion" editable="bottom">
+                                    <field name="name"/>
+                                    <field name="product_id"/>
+                                    <field name="product_qty"/>
+                                    <field name="date_start"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group invisible="not has_productions">
+                            <footer>
+                                <button name="action_open_availability_check_wizard" string="Verificar Disponibilidad" type="object" class="oe_highlight"/>
+                                <button name="action_open_validate_wizard" string="Validar OFs" type="object" class="oe_highlight"/>
+                            </footer>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_mo_search_wizard" model="ir.actions.act_window">
+            <field name="name">Iniciar Validacion Masiva</field>
+            <field name="res_model">mo.search.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_mass_mo_validation_root"
+            name="Validacion Masiva de OF"
+            sequence="100"/>
+
+        <menuitem id="menu_mo_search_wizard"
+            name="Iniciar Validacion Masiva"
+            parent="menu_mass_mo_validation_root"
+            action="action_mo_search_wizard"
+            sequence="10"/>
+
+    </data>
+</odoo>

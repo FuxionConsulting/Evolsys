@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="module_category_mass_mo_validation" model="ir.module.category">
+            <field name="name">Validacion Masiva de OF</field>
+            <field name="sequence">10</field> </record>
+
+        <record model="res.groups" id="group_mass_mo_validator">
+            <field name="name">Validacion Masiva de OF</field>
+            <field name="category_id" ref="mass_mo_validation.module_category_mass_mo_validation"/>
+            <field name="implied_ids" eval="[(4, ref('mrp.group_mrp_user'))]"/>
+            <field name="comment">Usuarios con permiso para usar la aplicacion de validacion masiva de ordenes de Fabricacion.</field>
+        </record>
+    </data>
+</odoo>

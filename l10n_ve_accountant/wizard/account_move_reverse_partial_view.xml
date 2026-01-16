@@ -1,0 +1,19 @@
+<odoo>
+    <record id="view_account_move_reverse_partial_form" model="ir.ui.view">
+        <field name="name">account.move.reverse.partial.form</field>
+        <field name="model">account.move.reverse.partial</field>
+        <field name="arch" type="xml">
+            <form string="Crear Nota de Crédito">
+                <field name="move_id" invisible="1"/>
+                <group>
+                    <p>Selecciona el tipo de Nota de Crédito que deseas crear para esta factura:</p>
+                    <field name="reverse_type" widget="radio"/>
+                </group>
+                <footer>
+                    <button name="action_reverse" string="Continuar" type="object" class="btn-primary"/>
+                    <button string="Cancelar" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,13 @@
+<odoo>
+  <record id="view_partner_form_inherit_retention" model="ir.ui.view">
+    <field name="name">res.partner.form.inherit.retention</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='property_account_position_id']" position="after">
+        <field name="retention_iva_rate"
+               modifiers="{'invisible': [('property_account_position_id','=', False), ('property_account_position_id.name','not in', ['Especial'])]}"/>
+      </xpath>
+    </field>
+  </record>
+</odoo>

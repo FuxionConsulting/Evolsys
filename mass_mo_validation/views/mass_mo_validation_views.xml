@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_open_mass_mo_validation" model="ir.actions.act_window">
+        <field name="name">Validacion Masiva de ordenes de Fabricacion</field>
+        <field name="res_model">mo.search.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field> </record>
+
+    <menuitem id="menu_mass_mo_validation_root"
+              name="Validacion Masiva de OF"
+              sequence="100" web_icon="stock,static/description/icon.png" groups="mass_mo_validation.group_mass_mo_validator"/> <menuitem id="menu_mass_mo_validation_action"
+              name="Iniciar Validacion Masiva"
+              parent="menu_mass_mo_validation_root"
+              action="action_open_mass_mo_validation"
+              sequence="10"/> </odoo>

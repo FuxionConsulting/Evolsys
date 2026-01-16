@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_retention_simple,access_retention_simple,model_account_retention_simple,account.group_account_invoice,1,1,1,1
+access_retention_line_simple,access_retention_line_simple,model_account_retention_line_simple,account.group_account_invoice,1,1,1,1

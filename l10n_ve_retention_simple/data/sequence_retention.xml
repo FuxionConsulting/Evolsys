@@ -1,0 +1,21 @@
+<odoo>
+  <record id="seq_retention_ref" model="ir.sequence">
+    <field name="name">Retention Reference</field>
+    <field name="code">retention.ref</field>
+    <field name="padding">5</field>
+    <field name="prefix"></field>
+    <field name="implementation">standard</field>
+    <field name="number_increment">1</field>
+    <field name="number_next">1</field>
+  </record>
+
+  <record id="seq_retention_number" model="ir.sequence">
+    <field name="name">Retention Voucher Number</field>
+    <field name="code">retention.simple</field>
+    <field name="padding">5</field>
+    <field name="prefix"></field>
+    <field name="implementation">standard</field>
+    <field name="number_increment">1</field>
+    <field name="number_next">1</field>
+  </record>
+</odoo>

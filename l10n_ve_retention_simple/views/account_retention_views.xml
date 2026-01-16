@@ -1,0 +1,68 @@
+<odoo>
+  <!-- Tree view: show only the internal reference as description -->
+  <record id="view_retention_simple_tree" model="ir.ui.view">
+    <field name="name">account.retention.simple.tree</field>
+    <field name="model">account.retention.simple</field>
+    <field name="arch" type="xml">
+      <tree string="Retenciones IVA">
+        <!-- Mostrar únicamente la referencia interna -->
+        <field name="retention_id" string="Descripción"/>
+        <field name="partner_id" string="Proveedor"/>
+        <field name="date" string="Fecha"/>
+        <field name="total_retention" string="Monto Retenido"/>
+        <field name="state" string="Estado"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- Form view: retention_id readonly, number editable for user input -->
+  <record id="view_retention_simple_form" model="ir.ui.view">
+    <field name="name">account.retention.simple.form</field>
+    <field name="model">account.retention.simple</field>
+    <field name="arch" type="xml">
+      <form>
+        <header>
+          <field name="state" widget="statusbar" statusbar_visible="draft,emitted,cancel"/>
+          <button name="action_emit" type="object" string="Emit" modifiers="{'invisible': [('state','!=','draft')]}"/>
+          <button name="action_cancel" type="object" string="Cancel" modifiers="{'invisible': [('state','not in', ['draft','emitted'])]}"/>
+        </header>
+        <sheet>
+          <group>
+            <field name="retention_id" readonly="1" string="Referencia Interna"/>
+            <field name="number" string="Voucher Number"/>
+            <field name="invoice_vendor_bill_id" readonly="1" string="Factura Asociada"/>
+            <field name="partner_id" string="Proveedor"/>
+            <field name="date" string="Fecha"/>
+            <field name="type_retention" string="Tipo"/>
+            <field name="total_retention" string="Total Retención"/>
+          </group>
+          <notebook>
+            <page string="Lines">
+              <field name="retention_line_ids">
+                <tree editable="bottom">
+                  <field name="move_id" string="Factura"/>
+                  <field name="invoice_amount" string="Base Imponible"/>
+                  <field name="iva_amount" string="IVA"/>
+                  <field name="retention_amount" string="Retención"/>
+                </tree>
+              </field>
+            </page>
+            <page string="Notes">
+              <field name="name" string="Descripción"/>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- Action and menu -->
+  <record id="action_retention_simple" model="ir.actions.act_window">
+    <field name="name">Retenciones IVA</field>
+    <field name="res_model">account.retention.simple</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <menuitem id="menu_account_retention_root" name="Retenciones" parent="account.menu_finance" sequence="95"/>
+  <menuitem id="menu_account_retention_supplier" name="Retenciones IVA" parent="menu_account_retention_root" action="action_retention_simple" sequence="1"/>
+</odoo>

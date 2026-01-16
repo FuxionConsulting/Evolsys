@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mo_search_wizard,mo.search.wizard,model_mo_search_wizard,mass_mo_validation.group_mass_mo_validator,1,1,1,1
+access_mo_availability_check_wizard,mo.availability.check.wizard,model_mo_availability_check_wizard,mass_mo_validation.group_mass_mo_validator,1,1,1,1
+access_mo_validate_wizard,mo.validate.wizard,model_mo_validate_wizard,mass_mo_validation.group_mass_mo_validator,1,1,1,1
+access_mo_availability_info,mo.availability.info,model_mo_availability_info,mass_mo_validation.group_mass_mo_validator,1,1,1,1
+access_mrp_production_mass_view,mrp.production,mrp.model_mrp_production,mass_mo_validation.group_mass_mo_validator,1,0,0,0

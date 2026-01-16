@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.module.category" id="module_category_mass_mo_validation">
+        <field name="name">Validacion de OF</field>
+        <field name="description">Categoría para la validacion masiva de ordenes de fabricacion.</field>
+        <field name="sequence">100</field> </record>
+</odoo>

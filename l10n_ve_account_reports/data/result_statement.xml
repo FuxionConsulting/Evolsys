@@ -1,0 +1,198 @@
+<odoo>
+    <record id="result_statement" model="account.report">
+        <field name="name">Result Statement</field>
+        <field name="filter_analytic_groupby" eval="True" />
+        <field name="filter_unfold_all" eval="True" />
+        <field name="filter_journals" eval="True" />
+        <field name="filter_hierarchy">by_default</field>
+        <field name="filter_multi_company">selector</field>
+        <field name="default_opening_date_filter">this_year</field>
+        <field name="column_ids">
+            <record id="result_statement_column" model="account.report.column">
+                <field name="name">Balance</field>
+                <field name="expression_label">balance</field>
+                <field name="figure_type">monetary</field>
+            </record>
+        </field>
+        <field name="line_ids">
+            <record id="account_financial_report_income_result_statement"
+                model="account.report.line">
+                <field name="name">INCOME</field>
+                <field name="code">INCRS</field>
+                <field name="groupby">account_id</field>
+                <field name="foldable" eval="True" />
+                <field name="expression_ids">
+                    <record id="account_financial_report_income_balance_result_statement"
+                        model="account.report.expression">
+                        <field name="label">balance</field>
+                        <field name="engine">domain</field>
+                        <field name="formula" eval="[('account_id.internal_group_report','in',('income'))]"/>
+                        <field name="date_scope">normal</field>
+                        <field name="subformula">sum</field>
+                    </record>
+                </field>
+            </record>
+            <record id="account_financial_report_cost_of_sales_result_statement"
+                model="account.report.line">
+                <field name="name">COST OF SALES</field>
+                <field name="code">COSRS</field>
+                <field name="groupby">account_id</field>
+                <field name="foldable" eval="True" />
+                <field name="expression_ids">
+                    <record id="account_financial_report_cost_of_sales_balance_result_statement"
+                        model="account.report.expression">
+                        <field name="label">balance</field>
+                        <field name="engine">domain</field>
+                        <field name="formula" eval="[('account_id.internal_group_report','in',('expense'))]"/>
+                        <field name="date_scope">normal</field>
+                        <field name="subformula">sum</field>
+                    </record>
+                </field>
+            </record>
+            <record id="account_financial_report_gross_result_statement"
+                model="account.report.line">
+                <field name="name">GROSS PROFIT</field>
+                <field name="code">GRS</field>
+                <field name="expression_ids">
+                    <record id="account_financial_report_gross_balance_result_statement"
+                        model="account.report.expression">
+                        <field name="label">balance</field>
+                        <field name="engine">aggregation</field>
+                        <field name="formula">INCRS.balance - COSRS.balance</field>
+                        <field name="date_scope">normal</field>
+                    </record>
+                </field>
+            </record>
+            <record id="account_financial_report_expenses_result_statement"
+                model="account.report.line">
+                <field name="name">EXPENSES</field>
+                <field name="code">EGRS</field>
+                <field name="groupby">account_id</field>
+                <field name="foldable" eval="True" />
+                <field name="expression_ids">
+                    <record id="account_financial_report_expenses_balance_result_statement"
+                        model="account.report.expression">
+                        <field name="label">balance</field>
+                        <field name="engine">domain</field>
+                        <field name="formula" eval="[('account_id.internal_group_report','in',('expense'))]"/>
+                        <field name="date_scope">normal</field>
+                        <field name="subformula">sum</field>
+                    </record>
+                </field>
+            </record>
+            <record id="account_financial_report_profit_and_loss_result_statement"
+                model="account.report.line">
+                <field name="name">PROFIT AND/OR LOSS</field>
+                <field name="code">PALRS</field>
+                <field name="expression_ids">
+                    <record id="account_financial_report_profit_and_loss_balance_result_statement"
+                        model="account.report.expression">
+                        <field name="label">balance</field>
+                        <field name="engine">aggregation</field>
+                        <field name="formula">GRS.balance - EGRS.balance</field>
+                        <field name="date_scope">normal</field>
+                    </record>
+                </field>
+            </record>
+        </field>
+    </record>
+
+    <record id="result_statement_usd" model="account.report">
+        <field name="name">Result Statement USD</field>
+        <field name="filter_analytic_groupby" eval="True" />
+        <field name="filter_unfold_all" eval="True" />
+        <field name="filter_journals" eval="True" />
+        <field name="filter_hierarchy">by_default</field>
+        <field name="filter_multi_company">selector</field>
+        <field name="default_opening_date_filter">this_year</field>
+        <field name="usd" eval="True"/>
+        <field name="column_ids">
+            <record id="result_statement_column_usd" model="account.report.column">
+                <field name="name">Balance (USD)</field>
+                <field name="expression_label">balance_foreign</field>
+                <field name="figure_type">monetary</field>
+            </record>
+        </field>
+        <field name="line_ids">
+            <record id="account_financial_report_income_result_statement_usd"
+                model="account.report.line">
+                <field name="name">INCOME</field>
+                <field name="code">INCRS</field>
+                <field name="groupby">account_id</field>
+                <field name="foldable" eval="True" />
+                <field name="expression_ids">
+                    <record id="account_financial_report_income_balance_result_statement_usd"
+                        model="account.report.expression">
+                        <field name="label">balance</field>
+                        <field name="engine">domain</field>
+                        <field name="formula" eval="[('account_id.internal_group_report','in',('income'))]"/>
+                        <field name="date_scope">normal</field>
+                        <field name="subformula">sum</field>
+                    </record>
+                </field>
+            </record>
+            <record id="account_financial_report_cost_of_sales_result_statement_usd"
+                model="account.report.line">
+                <field name="name">COST OF SALES</field>
+                <field name="code">COSRS</field>
+                <field name="groupby">account_id</field>
+                <field name="foldable" eval="True" />
+                <field name="expression_ids">
+                    <record id="account_financial_report_cost_of_sales_balance_result_statement_usd"
+                        model="account.report.expression">
+                        <field name="label">balance</field>
+                        <field name="engine">domain</field>
+                        <field name="formula" eval="[('account_id.internal_group_report','in',('expense'))]"/>
+                        <field name="date_scope">normal</field>
+                        <field name="subformula">sum</field>
+                    </record>
+                </field>
+            </record>
+            <record id="account_financial_report_gross_result_statement_usd"
+                model="account.report.line">
+                <field name="name">GROSS PROFIT</field>
+                <field name="code">GRS</field>
+                <field name="expression_ids">
+                    <record id="account_financial_report_gross_balance_result_statement_usd"
+                        model="account.report.expression">
+                        <field name="label">balance</field>
+                        <field name="engine">aggregation</field>
+                        <field name="formula">INCRS.balance - COSRS.balance</field>
+                        <field name="date_scope">normal</field>
+                    </record>
+                </field>
+            </record>
+            <record id="account_financial_report_expenses_result_statement_usd"
+                model="account.report.line">
+                <field name="name">EXPENSES</field>
+                <field name="code">EGRS</field>
+                <field name="groupby">account_id</field>
+                <field name="foldable" eval="True" />
+                <field name="expression_ids">
+                    <record id="account_financial_report_expenses_balance_result_statement_usd"
+                        model="account.report.expression">
+                        <field name="label">balance</field>
+                        <field name="engine">domain</field>
+                        <field name="formula" eval="[('account_id.internal_group_report','in',('expense'))]"/>
+                        <field name="date_scope">normal</field>
+                        <field name="subformula">sum</field>
+                    </record>
+                </field>
+            </record>
+            <record id="account_financial_report_profit_and_loss_result_statement_usd"
+                model="account.report.line">
+                <field name="name">PROFIT AND/OR LOSS</field>
+                <field name="code">PALRS</field>
+                <field name="expression_ids">
+                    <record id="account_financial_report_profit_and_loss_balance_result_statement_usd"
+                        model="account.report.expression">
+                        <field name="label">balance</field>
+                        <field name="engine">aggregation</field>
+                        <field name="formula">GRS.balance - EGRS.balance</field>
+                        <field name="date_scope">normal</field>
+                    </record>
+                </field>
+            </record>
+        </field>
+    </record>
+</odoo>

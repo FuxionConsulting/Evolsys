@@ -1,0 +1,20 @@
+{
+    "name": "Venezuela - Reportes de Contabilidad",
+    "summary": "Modificaciones de los informes contables, adaptados a la normativa venezolana.",
+    "license": "LGPL-3",
+    "author": "evolsys",
+    "website": "https://evolsys.net/",
+    "category": "Accounting/Accounting",
+    "version": "17.0.0.0.0",
+    "depends": ["base", "account_reports", "l10n_ve_accountant"],
+    "data": [
+        "security/security.xml",
+        "data/daily_ledger.xml",
+        "data/result_statement.xml",
+        "data/financial_situation_statement.xml",
+        "data/account_report_actions.xml",
+        "data/menuitems.xml",
+        "views/account_report_views.xml",
+        "views/report_views.xml",
+    ],
+}
