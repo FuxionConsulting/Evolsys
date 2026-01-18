@@ -1,10 +1,11 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 {
-    "name": "Venezuela - evolsys",
+    "name": "Venezuela - Evolsys",
     "website": "https://www.odoo.com/documentation/17.0/applications/finance/fiscal_localizations.html",
     "icon": "/account/static/description/l10n.png",
     "countries": ["ve"],
     "author": "Evolsys C.A",
+    "version": "19.0.0.0.0",
     "category": "Accounting/Localizations/Account Charts",
     "description": """
         Chart of Account for Venezuela.
