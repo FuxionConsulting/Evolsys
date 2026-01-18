@@ -4,7 +4,7 @@
     "website": "https://www.odoo.com/documentation/17.0/applications/finance/fiscal_localizations.html",
     "icon": "/account/static/description/l10n.png",
     "countries": ["ve"],
-    "author": "Odoo S.A., evolsys C.A",
+    "author": "Evolsys C.A",
     "category": "Accounting/Localizations/Account Charts",
     "description": """
         Chart of Account for Venezuela.
