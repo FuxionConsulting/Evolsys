@@ -5,7 +5,7 @@
     "icon": "/account/static/description/l10n.png",
     "countries": ["ve"],
     "author": "Evolsys C.A",
-    "version": "19.0.0.0.0",
+    "version": "19.0.0.0.1",
     "category": "Accounting/Localizations/Account Charts",
     "description": """
         Chart of Account for Venezuela.
