@@ -7,7 +7,7 @@
     "author": "evolsys",
     "website": "https://evolsys.net/",
     "category": "Technical",
-    "version": "17.0.0.0.2",
+    "version": "19.0.0.0.2",
     # any module necessary for this one to work correctly
     "depends": ["base", "l10n_ve_base"],
     "data": [
